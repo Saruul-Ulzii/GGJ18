@@ -12,11 +12,13 @@ public class Server : WebSocketBehavior
     public static Queue<Command> Commands = new Queue<Command>();
     public static List<Player> Players = new List<Player>();
 
+    public static string ServerUrl;
+
 	public static void Start() {
         var serverIp = ServiceDiscovery.GetIP();
-        var address = "ws://" + serverIp + ":5001";
-        Debug.Log("Creating Websocket on " + address);
-        var wssv = new WebSocketServer("ws://"+serverIp+":5001");
+        ServerUrl = "ws://" + serverIp + ":5001";
+        Debug.Log("Creating Websocket on " + ServerUrl);
+        var wssv = new WebSocketServer(ServerUrl);
         wssv.AddWebSocketService<Server>("/Server");
         wssv.Start();
         _socketServer = wssv;
