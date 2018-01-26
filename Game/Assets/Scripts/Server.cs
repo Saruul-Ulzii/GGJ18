@@ -62,10 +62,10 @@ public class Server : WebSocketBehavior
                 Send("ID;" + _player.Id.ToString());
                 break;
             case "button1":
-                Debug.Log(string.Format("Player {0} pressed button 1", command.Player));
+                Debug.Log(string.Format("Player {0} pressed button 1", command.Player.Id));
                 break;
             case "button2":
-                Debug.Log(string.Format("Player {0} pressed button 2", command.Player));
+                Debug.Log(string.Format("Player {0} pressed button 2", command.Player.Id));
                 break;
             default:
                 Debug.Log("Unknown command: " + command.CommandName);
