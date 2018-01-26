@@ -61,6 +61,7 @@ public class Server : WebSocketBehavior
                         Name = name
                     };
                     Debug.Log("Registered player: " + player.Name);
+                    Players.Add(player);
                     Send(player.Id.ToString());
                 } else
                 {
