@@ -2,6 +2,7 @@
 using WebSocketSharp;
 using WebSocketSharp.Server;
 using UnityEngine;
+using System;
 
 public class Server : WebSocketBehavior
 {
@@ -43,6 +44,11 @@ public class Server : WebSocketBehavior
     protected override void OnMessage(MessageEventArgs e)
     {
         var data = e.Data.Split(';');
+        if (data.Length == 2)
+        {
+            Send("Not a valid command: " + e.Data);
+        }
+
         var command = new Command()
         {
             Player = _player,
@@ -50,12 +56,21 @@ public class Server : WebSocketBehavior
             Data = data[1]
         };
 
-        Commands.Enqueue(command);
 
-        var msg = e.Data == "BALUS"
-                  ? "I've been balused already..."
-                  : "I'm not available now.";
+        switch (command.CommandName)
+        {
+            case "name":
+                Debug.Log("Name: " + command.Data);
+                break;
+            case "test":
+                Debug.Log("Command: " + command.CommandName);
+                break;
+            default:
+                Debug.Log("Unknown command: " + command.CommandName);
+                break;
+        }
 
+        var msg = e.Data;
         Send(msg);
     }
 }
