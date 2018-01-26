@@ -25,8 +25,7 @@ public class Command {
         string[] splitted = message.Split(';');
         if ( splitted.Length != 2)
         {
-            Debug.Log("Message:" + message);
-            throw new ArgumentException("Can't parse message!");
+            throw new ArgumentException("Can't parse message: " + message );
         }
         return new Command(splitted[0], splitted[1]);
     }

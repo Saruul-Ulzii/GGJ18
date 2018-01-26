@@ -21,6 +21,11 @@ public class WebSocketTest : WSClientBehaviour {
     public override void onConnectionReady(object sender, EventArgs e)
     {
         base.onConnectionReady(sender, e);
+        
+    }
+
+    public void sendTestCommand()
+    {
         Command testCommand = new Command("SayMyName", "Fuck the mainstream");
         sendCommand(testCommand);
     }
