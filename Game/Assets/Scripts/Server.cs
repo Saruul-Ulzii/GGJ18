@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebSocketSharp;
 using WebSocketSharp.Server;
+using UnityEngine;
 
 public class Server : WebSocketBehavior
 {
@@ -13,7 +14,10 @@ public class Server : WebSocketBehavior
     public static List<Player> Player = new List<Player>();
 
 	public static void Start() {
-        var wssv = new WebSocketServer("ws://localhost:5001");
+        var serverIp = ServiceDiscovery.GetIP();
+        var address = "ws://" + serverIp + ":5001";
+        Debug.Log("Creating Websocket on " + address);
+        var wssv = new WebSocketServer("ws://"+serverIp+":5001");
         wssv.AddWebSocketService<Server>("/Server");
         wssv.Start();
         _socketServer = wssv;
@@ -33,6 +37,7 @@ public class Server : WebSocketBehavior
         _player = new Player();
         _player.Id = _playerIds++;
         _player.Name = "Player " + (_player.Id + 1);
+        Debug.Log("Player " + _player.Name);
     }
 
     protected override void OnMessage(MessageEventArgs e)

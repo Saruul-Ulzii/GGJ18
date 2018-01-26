@@ -23,7 +23,11 @@ GameObject:
   - component: {fileID: 65491988271149182}
   - component: {fileID: 23547943404065944}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: ProtoEngine
+=======
+  m_Name: PrototypeEngine
+>>>>>>> 6f9f2b9cc8cd81b125845fa676ce97917a6b3474
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
