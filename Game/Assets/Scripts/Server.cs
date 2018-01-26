@@ -43,7 +43,7 @@ public class Server : WebSocketBehavior
         var command = new Command()
         {
             Player = _player,
-            CommandName = data[0],
+            CommandName = data[0].ToLower(),
             Data = data[1]
         };
 
