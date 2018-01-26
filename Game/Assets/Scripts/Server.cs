@@ -6,10 +6,11 @@ public class Server : WebSocketBehavior
 {
     private static int _playerIds = 0;
     private static WebSocketServer _socketServer;
-    private int _playerId;
+    private Player _player;
+    //private int _playerId;
 
     public static Queue<Command> Commands = new Queue<Command>();
-
+    public static List<Player> Player = new List<Player>();
 
 	public static void Start() {
         var wssv = new WebSocketServer("ws://localhost:5001");
@@ -29,7 +30,9 @@ public class Server : WebSocketBehavior
 
     public Server()
     {
-        _playerId = _playerIds++;
+        _player = new Player();
+        _player.Id = _playerIds++;
+        _player.Name = "Player " + (_player.Id + 1);
     }
 
     protected override void OnMessage(MessageEventArgs e)
@@ -37,7 +40,7 @@ public class Server : WebSocketBehavior
         var data = e.Data.Split(';');
         var command = new Command()
         {
-            PlayerId = _playerId,
+            Player = _player,
             CommandName = data[0],
             Data = data[1]
         };

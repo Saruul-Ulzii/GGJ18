@@ -14,7 +14,7 @@ public class Servertest : MonoBehaviour {
         for (int i = 0; i < Server.Commands.Count; i++)
         {
             var command = Server.Commands.Dequeue();
-            Debug.Log("PlayerID: " + command.PlayerId + ", Command: " + command.CommandName + ", Data: " + command.Data);
+            Debug.Log("PlayerID: " + command.Player.Id+", PLayerName: " + command.Player.Name + ", Command: " + command.CommandName + ", Data: " + command.Data);
         }       
 		
 	}
