@@ -259,7 +259,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!114 &1025105883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,5 +312,3 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49475a39474598043a9970117728cdc8, type: 2}
   m_IsPrefabParent: 0
-=======
->>>>>>> 6f9f2b9cc8cd81b125845fa676ce97917a6b3474
