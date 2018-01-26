@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChangeUI : MonoBehaviour {
 
@@ -20,6 +21,12 @@ public class ChangeUI : MonoBehaviour {
 
     public void ChangeTheUI()
     {
+        InputField textFieldCasted = inputField.GetComponent<InputField>(); 
+        if ( textFieldCasted.text == "")
+        {
+            Debug.Log("Please enter name!");
+            return;
+        }
         inputField.SetActive(false);
         enterTextButton.SetActive(false);
         startEngine.SetActive(true);

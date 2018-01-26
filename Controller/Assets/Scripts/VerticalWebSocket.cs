@@ -14,8 +14,23 @@ public class VerticalWebSocket : WSClientBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    public override void handleCommand(Command c)
+    {
+        base.handleCommand(c);
+        Debug.Log(c.Name);
+        Debug.Log(c.Content);
+    }
+
+    public override void onConnectionReady(object sender, EventArgs e)
+    {
+        base.onConnectionReady(sender, e);
+        initializeConnection();
+
+    }
+
+    public void initializeConnection()
+    {
+        Command testCommand = new Command("NAME", "Fuck the mainstream");
+        sendCommand(testCommand);
+    }
 }
