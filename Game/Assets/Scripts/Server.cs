@@ -65,9 +65,11 @@ public class Server : WebSocketBehavior
                 break;
             case "button1":
                 Debug.Log(string.Format("Player {0} pressed button 1", command.Player.Id));
+                Commands.Enqueue(command);
                 break;
             case "button2":
                 Debug.Log(string.Format("Player {0} pressed button 2", command.Player.Id));
+                Commands.Enqueue(command);
                 break;
             default:
                 Debug.Log("Unknown command: " + command.CommandName);
