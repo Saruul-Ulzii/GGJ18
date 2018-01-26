@@ -5,6 +5,7 @@ public class Player
     public int Id;
     public string Name;
     public Texture2D Photo;
+    public Server Server;
 
     public Color Color
     {

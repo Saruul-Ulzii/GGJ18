@@ -26,8 +26,11 @@ public class Server : WebSocketBehavior
 
     public Server()
     {
-        _player = new Player();
-        _player.Id = _playerIds++;
+        _player = new Player
+        {
+            Id = _playerIds++,
+            Server = this
+        };
         Players.Add(_player);
         Debug.Log("Registerd player with ID: " + _player.Id);
     }
@@ -77,8 +80,11 @@ public class Server : WebSocketBehavior
         }
     }
 
-    private bool IsNameUnique(string name)
+    public static void StartGame()
     {
-        return true;
+        foreach(var player in Players)
+        {
+            player.Server.Send("START;");
+        }
     }
 }
