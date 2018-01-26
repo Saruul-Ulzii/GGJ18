@@ -26,8 +26,11 @@ public class Server : WebSocketBehavior
 
     public Server()
     {
-        _player = new Player();
-        _player.Id = _playerIds++;
+        _player = new Player
+        {
+            Id = _playerIds++,
+            Server = this
+        };
         Players.Add(_player);
         Debug.Log("Registerd player with ID: " + _player.Id);
     }
@@ -65,9 +68,11 @@ public class Server : WebSocketBehavior
                 break;
             case "button1":
                 Debug.Log(string.Format("Player {0} pressed button 1", command.Player.Id));
+                Commands.Enqueue(command);
                 break;
             case "button2":
                 Debug.Log(string.Format("Player {0} pressed button 2", command.Player.Id));
+                Commands.Enqueue(command);
                 break;
             default:
                 Debug.Log("Unknown command: " + command.CommandName);
@@ -75,8 +80,11 @@ public class Server : WebSocketBehavior
         }
     }
 
-    private bool IsNameUnique(string name)
+    public static void StartGame()
     {
-        return true;
+        foreach(var player in Players)
+        {
+            player.Server.Send("START;");
+        }
     }
 }

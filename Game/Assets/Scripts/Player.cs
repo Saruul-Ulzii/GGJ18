@@ -5,13 +5,15 @@ public class Player
     public int Id;
     public string Name;
     public Texture2D Photo;
+    public Server Server;
 
     public Color Color
     {
         get
         {
-            // TODO should be based on name
-            return Color.blue;
+            var num = PlayerColor.Instance.colors.Count - 1;
+            var color = PlayerColor.Instance.colors[Id % num];
+            return color;
         }
     }
 }
