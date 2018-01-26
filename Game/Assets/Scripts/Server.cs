@@ -9,10 +9,9 @@ public class Server : WebSocketBehavior
     private static int _playerIds = 0;
     private static WebSocketServer _socketServer;
     private Player _player;
-    //private int _playerId;
 
     public static Queue<Command> Commands = new Queue<Command>();
-    public static List<Player> Player = new List<Player>();
+    public static List<Player> Players = new List<Player>();
 
 	public static void Start() {
         var serverIp = ServiceDiscovery.GetIP();
@@ -31,14 +30,6 @@ public class Server : WebSocketBehavior
         {
             _socketServer.Stop();            
         }
-    }
-
-    public Server()
-    {
-        _player = new Player();
-        _player.Id = _playerIds++;
-        _player.Name = "Player " + (_player.Id + 1);
-        Debug.Log("Player " + _player.Name);
     }
 
     protected override void OnMessage(MessageEventArgs e)
@@ -60,7 +51,22 @@ public class Server : WebSocketBehavior
         switch (command.CommandName)
         {
             case "name":
-                Debug.Log("Name: " + command.Data);
+                var name = command.Data;
+                if (IsNameUnique(name))
+                {
+                    _playerIds++;
+                    var player = new Player
+                    {
+                        Id = _playerIds,
+                        Name = name
+                    };
+                    Debug.Log("Registered player: " + player.Name);
+                    Send(player.Id.ToString());
+                } else
+                {
+                    Send("Error: Name alreay used");
+                    return;
+                }
                 break;
             case "test":
                 Debug.Log("Command: " + command.CommandName);
@@ -72,5 +78,10 @@ public class Server : WebSocketBehavior
 
         var msg = e.Data;
         Send(msg);
+    }
+
+    private bool IsNameUnique(string name)
+    {
+        return true;
     }
 }
