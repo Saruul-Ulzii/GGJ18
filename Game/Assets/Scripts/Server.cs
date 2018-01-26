@@ -2,7 +2,6 @@
 using WebSocketSharp;
 using WebSocketSharp.Server;
 using UnityEngine;
-using System;
 
 public class Server : WebSocketBehavior
 {
@@ -22,7 +21,14 @@ public class Server : WebSocketBehavior
         wssv.Start();
         _socketServer = wssv;
     }
-        //wssv.Stop();
+
+    public Server()
+    {
+        _player = new Player();
+        _player.Id = _playerIds++;
+        Players.Add(_player);
+        Debug.Log("Registerd player with ID: " + _player.Id);
+    }
 
     public static void Stop()
     {
@@ -35,7 +41,7 @@ public class Server : WebSocketBehavior
     protected override void OnMessage(MessageEventArgs e)
     {
         var data = e.Data.Split(';');
-        if (data.Length == 2)
+        if (data.Length != 2)
         {
             Send("Not a valid command: " + e.Data);
         }
@@ -47,38 +53,24 @@ public class Server : WebSocketBehavior
             Data = data[1]
         };
 
-
         switch (command.CommandName)
         {
             case "name":
                 var name = command.Data;
-                if (IsNameUnique(name))
-                {
-                    _playerIds++;
-                    var player = new Player
-                    {
-                        Id = _playerIds,
-                        Name = name
-                    };
-                    Debug.Log("Registered player: " + player.Name);
-                    Players.Add(player);
-                    Send(player.Id.ToString());
-                } else
-                {
-                    Send("Error: Name alreay used");
-                    return;
-                }
+                _player.Name = name;
+                Debug.Log("Player name set: " + _player.Name);
+                Send("ID;" + _player.Id.ToString());
                 break;
-            case "test":
-                Debug.Log("Command: " + command.CommandName);
+            case "button1":
+                Debug.Log(string.Format("Player {0} pressed button 1", command.Player));
+                break;
+            case "button2":
+                Debug.Log(string.Format("Player {0} pressed button 2", command.Player));
                 break;
             default:
                 Debug.Log("Unknown command: " + command.CommandName);
                 break;
         }
-
-        var msg = e.Data;
-        Send(msg);
     }
 
     private bool IsNameUnique(string name)
