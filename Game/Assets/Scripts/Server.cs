@@ -2,17 +2,15 @@
 using WebSocketSharp;
 using WebSocketSharp.Server;
 using UnityEngine;
-using System;
 
 public class Server : WebSocketBehavior
 {
     private static int _playerIds = 0;
     private static WebSocketServer _socketServer;
     private Player _player;
-    //private int _playerId;
 
     public static Queue<Command> Commands = new Queue<Command>();
-    public static List<Player> Player = new List<Player>();
+    public static List<Player> Players = new List<Player>();
 
 	public static void Start() {
         var serverIp = ServiceDiscovery.GetIP();
@@ -23,7 +21,14 @@ public class Server : WebSocketBehavior
         wssv.Start();
         _socketServer = wssv;
     }
-        //wssv.Stop();
+
+    public Server()
+    {
+        _player = new Player();
+        _player.Id = _playerIds++;
+        Players.Add(_player);
+        Debug.Log("Registerd player with ID: " + _player.Id);
+    }
 
     public static void Stop()
     {
@@ -33,18 +38,10 @@ public class Server : WebSocketBehavior
         }
     }
 
-    public Server()
-    {
-        _player = new Player();
-        _player.Id = _playerIds++;
-        _player.Name = "Player " + (_player.Id + 1);
-        Debug.Log("Player " + _player.Name);
-    }
-
     protected override void OnMessage(MessageEventArgs e)
     {
         var data = e.Data.Split(';');
-        if (data.Length == 2)
+        if (data.Length != 2)
         {
             Send("Not a valid command: " + e.Data);
         }
@@ -52,25 +49,32 @@ public class Server : WebSocketBehavior
         var command = new Command()
         {
             Player = _player,
-            CommandName = data[0],
+            CommandName = data[0].ToLower(),
             Data = data[1]
         };
-
 
         switch (command.CommandName)
         {
             case "name":
-                Debug.Log("Name: " + command.Data);
+                var name = command.Data;
+                _player.Name = name;
+                Debug.Log("Player name set: " + _player.Name);
+                Send("ID;" + _player.Id.ToString());
                 break;
-            case "test":
-                Debug.Log("Command: " + command.CommandName);
+            case "button1":
+                Debug.Log(string.Format("Player {0} pressed button 1", command.Player));
+                break;
+            case "button2":
+                Debug.Log(string.Format("Player {0} pressed button 2", command.Player));
                 break;
             default:
                 Debug.Log("Unknown command: " + command.CommandName);
                 break;
         }
+    }
 
-        var msg = e.Data;
-        Send(msg);
+    private bool IsNameUnique(string name)
+    {
+        return true;
     }
 }
