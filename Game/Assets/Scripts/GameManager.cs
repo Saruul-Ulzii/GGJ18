@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     public GameObject StartUiRoot;
     public GameObject LobbyUiRoot;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         GameState = GameStates.None;
