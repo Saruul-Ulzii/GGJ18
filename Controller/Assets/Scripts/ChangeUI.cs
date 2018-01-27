@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ChangeUI : MonoBehaviour {
 
-    public GameObject inputField;
+    public InputField inputField;
     public GameObject enterTextButton;
-    public GameObject startEngine;
+    public VerticalWebSocket ws;
 
     // Use this for initialization
     void Start () {
@@ -21,14 +21,13 @@ public class ChangeUI : MonoBehaviour {
 
     public void ChangeTheUI()
     {
-        InputField textFieldCasted = inputField.GetComponent<InputField>(); 
-        if ( textFieldCasted.text == "")
+        if ( string.IsNullOrEmpty(inputField.text))
         {
             Debug.Log("Please enter name!");
             return;
         }
-        inputField.SetActive(false);
+        inputField.gameObject.SetActive(false);
         enterTextButton.SetActive(false);
-        startEngine.SetActive(true);
+        ws.SendName(inputField.text);
     }
 }

@@ -37,7 +37,7 @@ public class WSClientBehaviour : MonoBehaviour {
         Debug.Log("Captn, connection is vertial!");
     }
 
-    protected void connect( string url )
+    protected virtual void connect( string url )
     {
         webSocket = new WebSocket(url);
         webSocket.OnMessage += handleMessage;
