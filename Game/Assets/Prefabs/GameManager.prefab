@@ -77,7 +77,6 @@ GameObject:
   - component: {fileID: 114693733605867432}
   - component: {fileID: 114652038529144806}
   - component: {fileID: 114602313319044254}
-  - component: {fileID: 114591085408864018}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -114,6 +113,22 @@ GameObject:
   - component: {fileID: 114597013007988564}
   m_Layer: 5
   m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1721482546040726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4928289681069414}
+  - component: {fileID: 114595692955650454}
+  m_Layer: 0
+  m_Name: AchievmentManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,8 +179,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224229826262710614}
+  - {fileID: 4928289681069414}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4928289681069414
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721482546040726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 102.08849, y: -36.99678, z: 84.125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4433567424459466}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114259890867896076
 MonoBehaviour:
@@ -409,26 +438,63 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Start
---- !u!114 &114591085408864018
+--- !u!114 &114595692955650454
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1488418459459908}
+  m_GameObject: {fileID: 1721482546040726}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ec9d5ba12014ae4f9e7b9cd09ed2087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Achievements:
-  - Id: 0
-    Name: Pressen!
-    Description: "Halte den Knopf f\xFCr mindestens 5 Sekunden gedr\xFCckt!"
-    Goal: 5
+  - Name: Speed
+    Description: Fly at least 100 km/h!
     Time: 0
     Points: 100
-    Datas:
-    - {fileID: 0}
+    Goals:
+    - IsPlayerGoal: 0
+      PlayerId: 0
+      Id: SPEED
+      Goal: 100
+  - Name: Be toxic!
+    Description: Let your trusters on for 15 seconds!
+    Time: 0
+    Points: 100
+    Goals:
+    - IsPlayerGoal: 1
+      PlayerId: 0
+      Id: PRESSTIME
+      Goal: 15
+  - Name: Be stupid!
+    Description: Don't touch anything for 15 seconds!
+    Time: 0
+    Points: 100
+    Goals:
+    - IsPlayerGoal: 1
+      PlayerId: 0
+      Id: RELEASETIME
+      Goal: 15
+  - Name: Got'em!
+    Description: Burn 3 Asteroids with yopur thrusters!
+    Time: 0
+    Points: 0
+    Goals:
+    - IsPlayerGoal: 1
+      PlayerId: 0
+      Id: BURNEDASTEROIDS
+      Goal: 3
+  - Name: Just don't care!
+    Description: Hit 2 Asteroids!
+    Time: 0
+    Points: 0
+    Goals:
+    - IsPlayerGoal: 0
+      PlayerId: 0
+      Id: HITS
+      Goal: 2
 --- !u!114 &114597013007988564
 MonoBehaviour:
   m_ObjectHideFlags: 1

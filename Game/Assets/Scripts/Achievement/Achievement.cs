@@ -13,8 +13,7 @@ public class Achievement
 
     public bool IsAchieved()
     {
-        if (Goals.All(g => g.IsAchieved())) return true;
-        return false;
+        return Goals.All(g => g.IsAchieved());
     }
 
     public Achievement Clone(int playerId)
@@ -46,11 +45,15 @@ public class AchievementGoal
     
     public bool IsAchieved()
     {
+        float data;
         if (IsPlayerGoal)
         {
-            return AchievementManager.Instance.GetPlayerData(PlayerId, Id) >= Goal;
+            data = AchievementManager.Instance.GetPlayerData(PlayerId, Id);
         }
-
-        return AchievementManager.Instance.GetData(Id) >= Goal;
+        else
+        {
+            data = AchievementManager.Instance.GetData(Id);
+        }
+        return data >= Goal;
     }
 }

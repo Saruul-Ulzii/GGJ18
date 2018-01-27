@@ -12,7 +12,7 @@ public class Player
     public int CommandCount;
 
     public float StateUpdateTime;
-
+        
     public Color Color
     {
         get
