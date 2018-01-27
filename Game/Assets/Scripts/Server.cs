@@ -16,11 +16,13 @@ public class Server : WebSocketBehavior
 
 	public static void Start() {
         var serverIp = ServiceDiscovery.GetIP();
-        ServerUrl = "ws://" + serverIp + ":5001";
-        Debug.Log("Creating Websocket on " + ServerUrl);
-        var wssv = new WebSocketServer(ServerUrl);
-        wssv.AddWebSocketService<Server>("/Server");
+        var address = "ws://" + serverIp + ":5001";
+        var route = "/Server";
+        Debug.Log("Creating Websocket on " + address);
+        var wssv = new WebSocketServer(address);
+        wssv.AddWebSocketService<Server>(route);
         wssv.Start();
+        ServerUrl = address + route;
         _socketServer = wssv;
     }
 
