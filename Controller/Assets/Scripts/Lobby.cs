@@ -12,14 +12,14 @@ public class Lobby : MonoBehaviour
 
     private void Start()
     {
-        if(ws.State == WebsocketState.UnInitialized)
+        IPText.text = "IP: " +  WebSocketTest.URL;
+        ws.connect(WebSocketTest.URL);
+
+        if (ws.State == WebsocketState.Failed)
         {
             SceneManager.LoadScene("qr-reader");
             return;
         }
-
-        IPText.text = "IP: " +  WebSocketTest.URL;
-        ws.connect(WebSocketTest.URL);
     }
 
     public void SendName()
