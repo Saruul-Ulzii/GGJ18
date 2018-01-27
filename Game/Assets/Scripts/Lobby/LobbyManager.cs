@@ -52,6 +52,7 @@ public class LobbyManager : MonoBehaviour
     public void RemovePlayer(Player player)
     {
         var entry = LobbyPlayer.FirstOrDefault(p => p.Player == player);
+        LobbyPlayer.Remove(entry);
         Destroy(entry.gameObject);
         UpdateStartButton();
     }

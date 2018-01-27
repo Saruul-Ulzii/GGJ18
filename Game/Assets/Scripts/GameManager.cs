@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject StartUiRoot;
     public GameObject LobbyUiRoot;
 
+    public bool HostWebsocketLocal;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
     public void StartLobby()
     {
         GameState = GameStates.Lobby;
-        Server.Start();
+        Server.Start(HostWebsocketLocal);
         UpdateUi();
     }
 

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ZXing;
-using ZXing.QrCode;
+using UnityEngine.UI;
 
 public class AddressQrReader : MonoBehaviour {
 
@@ -14,17 +13,20 @@ public class AddressQrReader : MonoBehaviour {
 
 	public VerticalWebSocket Ws;
 	public GameObject Next;
+    public Image webcamDisplay;
 
-    public Int32 counter;
+    private Int32 counter;
 
-	void Start() 
+
+    void Start() 
 	{
 		screenRect = new Rect(0, 0, Screen.width, Screen.height);
 		camTexture = new WebCamTexture();
 		camTexture.requestedHeight = Screen.height; 
 		camTexture.requestedWidth = Screen.width;
         counter = 0;
-		if (camTexture != null) 
+
+        if (camTexture != null) 
 		{
             coroutine_LowerFramerateForSeconds(1);
             camTexture.Play();
@@ -57,8 +59,22 @@ public class AddressQrReader : MonoBehaviour {
                 Debug.LogWarning(ex.Message);
             }
         }
-        
 	}
+
+    private void Update()
+    {
+        if(camTexture == null)
+        {
+            return;
+        }
+
+        Texture2D tex = new Texture2D(camTexture.width, camTexture.height);
+        tex.SetPixels32(camTexture.GetPixels32());
+        tex.Apply();
+
+        var sprite = Sprite.Create(tex, new Rect(0, 0, camTexture.width, camTexture.height), Vector2.zero);
+        webcamDisplay.sprite = sprite;
+    }
 
     private IEnumerator coroutine_LowerFramerateForSeconds( float seconds)
     {

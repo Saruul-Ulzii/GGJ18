@@ -14,9 +14,9 @@ public class Server : WebSocketBehavior
 
     public static string ServerUrl;
 
-	public static void Start() {
+    public static void Start(bool isLocal = false) {
 
-        var serverIp = ServiceDiscovery.GetIP();
+        var serverIp = isLocal ? "localhost" : ServiceDiscovery.GetIP();
         var address = "ws://" + serverIp + ":5001";
         var route = "/Server";
         ServerUrl = address + route;
@@ -38,6 +38,11 @@ public class Server : WebSocketBehavior
         };
         Players.Add(_player);
         Debug.Log("Registerd player with ID: " + _player.Id);
+    }
+
+    ~Server()
+    {
+        
     }
 
     public static void Stop()
@@ -84,6 +89,13 @@ public class Server : WebSocketBehavior
                 Debug.Log("Unknown command: " + command.CommandName);
                 break;
         }
+    }
+
+    protected override void OnClose(CloseEventArgs e)
+    {
+        Debug.Log("Player disconnected from Websocket: " + _player.Id);
+        Players.Remove(_player);        
+        _player = null;
     }
 
     public static void StartGame()
