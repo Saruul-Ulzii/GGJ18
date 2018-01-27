@@ -19,7 +19,6 @@ public class SpaceShipController : MonoBehaviour {
     [SerializeField]
     Rigidbody _Rigidbody;
 
-    private int _TestPlayerControls = 1;
     private List<TriebwerkController> _EngineControllers = new List<TriebwerkController>();
 
     private Dictionary<Player, bool> _engineState = new Dictionary<Player, bool>();
@@ -87,7 +86,7 @@ public class SpaceShipController : MonoBehaviour {
     {
         if (pressed)
         {
-            var tr = transform.GetChild(_TestPlayerControls);
+            var tr = transform.GetChild(playerID+1);
             var direction = (tr.rotation * Vector3.back);
 
             var orig = tr.position - direction;

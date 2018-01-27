@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static int MinPlayer = 2;
+    public static int MinPlayer = 3;
 
     public GameStates GameState;
     public LobbyManager LobbyManager;

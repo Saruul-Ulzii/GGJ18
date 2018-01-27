@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <meta charset="utf-8" />
   <title>WebSocket Test</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script>
   <script language="javascript" type="text/javascript">
 
   var wsUri = "ws://localhost:5001/Server";
@@ -24,7 +25,7 @@
   function onOpen(evt)
   {
     writeToScreen("CONNECTED");
-    doSend("WebSocket rocks");
+    //doSend("WebSocket rocks");
   }
 
   function onClose(evt)
@@ -35,7 +36,7 @@
   function onMessage(evt)
   {
     writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-    websocket.close();
+    //websocket.close();
   }
 
   function onError(evt)
@@ -56,11 +57,40 @@
     pre.innerHTML = message;
     output.appendChild(pre);
   }
+  
+  function ChangeName()
+  {
+	  var name = $("#name").val();
+	  doSend("NAME;"+name);
+  }
+  
+  function Press()
+  {
+	  doSend("BUTTON1;PRESSED");
+  }
+  
+  function Release()
+  {
+	  doSend("BUTTON1;RELEASED");
+  }
+  
+  function Clear()
+  {
+	  $("#output").empty();
+  }
 
   window.addEventListener("load", init, false);
 
   </script>
 
-  <h2>WebSocket Test</h2>
-
+  <h2>WebSocket Test</h2> 
+  
+  <input type="text" id="name" /> <input type="button" onClick="ChangeName()" value="Change Name" />
+  <br />
+  <input type="button" value="PRESS" onClick="Press()" /><input type="button" value="RELEASE" onClick="Release()" />
+  <br />
+  <br />  
+  <input type="button" onClick="Clear()" value="Clear Output" />
+  <br />
   <div id="output"></div>
+  <br />
