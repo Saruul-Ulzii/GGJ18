@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,4 +12,10 @@ public class Achievement
     public float Time;
     public int Points;
     public List<AchievementData> Datas;
+
+    public bool IsAchieved()
+    {
+        if (Datas.All(d => d.GetData() >= Goal)) return true;
+        return false;
+    }
 }

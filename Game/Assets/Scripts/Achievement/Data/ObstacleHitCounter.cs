@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObstacleHitCounter : AchievementData
 {
+
     public void HitObstacle()
     {
         _value += 1;
