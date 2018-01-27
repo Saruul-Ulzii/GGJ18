@@ -8,7 +8,7 @@ public class Asteroid : MonoBehaviour
 
     Transform _Transform;
 
-    public GameObject AchivementManager;
+    public AchievementManager AchivementManager;
 
     internal void Init(AsteroidSpawner asteroidSpawner, Transform spawnerTransform, Transform spaceShipTr, float spawnDistance, float destructionDistance, float speed)
     {
@@ -26,6 +26,8 @@ public class Asteroid : MonoBehaviour
         _Transform.position = _SpaceshipTransform.position + (spawnDistance * spawnVec);
         var rigid = GetComponent<Rigidbody>();
         rigid.velocity = speed * -spawnVec;
+        var tau = 2 * Mathf.PI;
+        rigid.angularVelocity = new Vector3(Random.Range(-tau, tau), Random.Range(-tau, tau), Random.Range(-tau, tau));
     }
 
     private void Update()
@@ -43,8 +45,8 @@ public class Asteroid : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        float hits = AchivementManager.GetComponent<AchievementManager>().GetData("HITS");
-        AchivementManager.GetComponent<AchievementManager>().SetData("HITS", hits+1);
+        float hits = AchivementManager.GetData("HITS");
+        AchivementManager.SetData("HITS", hits+1);
 
         Destroy();
     }
