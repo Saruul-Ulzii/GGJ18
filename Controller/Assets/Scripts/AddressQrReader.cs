@@ -26,7 +26,8 @@ public class AddressQrReader : MonoBehaviour {
         counter = 0;
 		if (camTexture != null) 
 		{
-			camTexture.Play();
+            coroutine_LowerFramerateForSeconds(1);
+            camTexture.Play();
 		}
 	}
 
@@ -58,4 +59,16 @@ public class AddressQrReader : MonoBehaviour {
         }
         
 	}
+
+    private IEnumerator coroutine_LowerFramerateForSeconds( float seconds)
+    {
+        int previous = Application.targetFrameRate;
+        Application.targetFrameRate = 30;
+
+        yield return new WaitForSeconds(seconds);
+        if (Application.targetFrameRate == 30)
+        {
+            Application.targetFrameRate = previous; 
+        }
+    }
 }
