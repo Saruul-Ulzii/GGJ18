@@ -54,6 +54,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameState: 0
   LobbyManager: {fileID: 114695950914039520}
+  StartUiRoot: {fileID: 0}
+  LobbyUiRoot: {fileID: 0}
 --- !u!114 &114695950914039520
 MonoBehaviour:
   m_ObjectHideFlags: 1

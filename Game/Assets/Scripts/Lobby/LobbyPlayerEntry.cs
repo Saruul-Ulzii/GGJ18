@@ -5,13 +5,19 @@ using UnityEngine.UI;
 
 public class LobbyPlayerEntry : MonoBehaviour
 {
-    private Player _player;
+    public Player Player;
     public Text PlayerNameText;
     public Image PlayerColorImage;
     
     public void AssignPlayer(Player player)
     {
-        _player = player;
+        Player = player;
+        PlayerNameText.text = player.Name;
+        PlayerColorImage.color = player.Color;
+    }
+
+    public void UpdatePlayer(Player player)
+    {
         PlayerNameText.text = player.Name;
         PlayerColorImage.color = player.Color;
     }
