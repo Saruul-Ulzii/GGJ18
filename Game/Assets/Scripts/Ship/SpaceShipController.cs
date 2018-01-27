@@ -17,6 +17,8 @@ public class SpaceShipController : MonoBehaviour {
     [SerializeField]
     float _RotationSpeed = 60.0f;
 
+    public GameObject AchievementManager;
+
     [SerializeField]
     Rigidbody _Rigidbody;
 
@@ -35,6 +37,9 @@ public class SpaceShipController : MonoBehaviour {
 
     void Update()
     {
+        float speed = _Rigidbody.velocity.magnitude;
+        AchievementManager.GetComponent<AchievementManager>().SetData("SPEED", speed);
+
         foreach (var kv in _engineState)
         {
             RunEngine(kv.Key.Id, kv.Value);
@@ -119,8 +124,14 @@ public class SpaceShipController : MonoBehaviour {
 
     private void RunEngine(int playerID, bool pressed)
     {
+        AchievementManager achvManager = AchievementManager.GetComponent<AchievementManager>();
+        float pressTime = achvManager.GetPlayerData(playerID, "PRESSTIME");
+        float releaseTime = achvManager.GetPlayerData(playerID, "RELEASETIME");
+
         if (pressed)
         {
+            pressTime += Time.deltaTime;
+            releaseTime = 0;
             var tr = transform.GetChild(playerID+1);
             var direction = (tr.rotation * Vector3.back);
 
@@ -128,6 +139,14 @@ public class SpaceShipController : MonoBehaviour {
             Debug.DrawLine(orig, orig + 3 * direction, Color.red);
             _Rigidbody.AddForceAtPosition(0.1f * direction, orig, ForceMode.Impulse);
         }
+        else
+        {
+            pressTime = 0;
+            releaseTime += Time.deltaTime;
+        }
+
+        achvManager.SetPlayerData(playerID, "PRESSTIME", pressTime);
+        achvManager.SetPlayerData(playerID, "RELEASETIME", releaseTime);
 
         int engineId = playerID % _EngineControllers.Count;
         _EngineControllers[engineId].On = pressed;
