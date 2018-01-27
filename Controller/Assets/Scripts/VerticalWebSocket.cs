@@ -11,6 +11,8 @@ public class VerticalWebSocket : WSClientBehaviour
     public string PlayerName {get; private set;}
     public GameObject Button1;
 
+    private GameObject _currentInput;
+
 	// Use this for initialization
     void Start () {
         
@@ -32,6 +34,12 @@ public class VerticalWebSocket : WSClientBehaviour
 			case "id":
 				HandleIdCommand(c.Content.ToLower());
                 break;
+            case "start":
+                HandleStartCommand();
+                break;
+            default: 
+                Debug.Log("unknown command!");
+                break;
 		}
 
     }
@@ -40,13 +48,25 @@ public class VerticalWebSocket : WSClientBehaviour
     {
         if(State != WebsocketState.NameSent)
         {
-            Debug.Log("Wrong context for command");
+            Debug.Log("Wrong context for ID command");
             return;
         }
         Debug.Log("Received ID");
         State = WebsocketState.Initialized;
-        PlayerId = int.Parse(arg);
-        Button1.SetActive(true);
+        PlayerId = int.Parse(arg);       
+    }
+
+    private void HandleStartCommand()
+    {
+        if(State != WebsocketState.Initialized)
+        {
+            Debug.Log("Wrong context for START command");
+            return;
+        }
+        Debug.Log("Received START");
+        State = WebsocketState.GameStarted;
+        _currentInput = Button1;
+        _currentInput.SetActive(true);
     }
 
     public override void onConnectionReady(object sender, EventArgs e)
