@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MKGlowTex:
-        m_Texture: {fileID: 2800000, guid: b73250d6693384c41b60685a3f569f93, type: 3}
+        m_Texture: {fileID: 2800000, guid: a0b38f6fb009d51429eb5ed92e8ea9e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -31,6 +31,6 @@ Material:
     - _MKGlowPower: 2.3
     - _MKGlowTexStrength: 0.81
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.32352942, g: 0.32352942, b: 0.32352942, a: 1}
     - _MKGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _MKGlowTexColor: {r: 1, g: 1, b: 1, a: 1}
