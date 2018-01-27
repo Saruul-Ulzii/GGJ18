@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class VerticalWebSocket : WSClientBehaviour
@@ -12,11 +10,6 @@ public class VerticalWebSocket : WSClientBehaviour
     public GameObject Button1;
 
     private GameObject _currentInput;
-
-	// Use this for initialization
-    void Start () {
-        
-    }
 
     public override void connect(string url)
     {

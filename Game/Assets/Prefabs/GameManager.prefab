@@ -552,7 +552,8 @@ MonoBehaviour:
     Goal: 5
     Time: 0
     Points: 100
-    Datas: []
+    Datas:
+    - {fileID: 0}
 --- !u!114 &114597013007988564
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -662,7 +663,7 @@ MonoBehaviour:
   LobbyManager: {fileID: 114652038529144806}
   StartUiRoot: {fileID: 1037732091811494}
   LobbyUiRoot: {fileID: 1152891785079042}
-  HostWebsocketLocal: 1
+  HostWebsocketLocal: 0
   GameScene: game
 --- !u!114 &114701178600784050
 MonoBehaviour:

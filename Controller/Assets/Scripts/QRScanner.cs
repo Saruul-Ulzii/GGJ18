@@ -36,6 +36,7 @@ public class QRScanner : MonoBehaviour
         // Track status of the scanner
         BarcodeScanner.StatusChanged += (sender, arg) => {
             TextHeader.text = "Status: " + BarcodeScanner.Status;
+            WebSocketTest.URL = BarcodeScanner.Status.ToString();
         };
     }
 
