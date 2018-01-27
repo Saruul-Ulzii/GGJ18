@@ -5,9 +5,11 @@ public class Lobby : MonoBehaviour
 {
     public InputField inputField;
     public VerticalWebSocket ws;
+    public Text IPText;
 
     private void Start()
     {
+        IPText.text = "IP: " +  WebSocketTest.URL;
         ws.connect(WebSocketTest.URL);
     }
 
