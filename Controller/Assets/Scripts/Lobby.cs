@@ -23,9 +23,12 @@ public class Lobby : MonoBehaviour
             return;
         }
 
-        inputField.gameObject.SetActive(false);
-        joinBtn.SetActive(false);
-        waitingScreen.SetActive(true);
-        ws.SendName(inputField.text);
+        bool sent = ws.SendName(inputField.text);
+        if (sent)
+        {
+            inputField.gameObject.SetActive(false);
+            joinBtn.SetActive(false);
+            waitingScreen.SetActive(true);
+        }
     }
 }

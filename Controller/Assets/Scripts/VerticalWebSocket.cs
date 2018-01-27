@@ -69,13 +69,19 @@ public class VerticalWebSocket : WSClientBehaviour
         base.onConnectionReady(sender, e);
     }
 
-    public void SendName(string playerName)
+    public bool SendName(string playerName)
     {
+        if(State != WebsocketState.UnInitialized)
+        {
+            return false;
+        }
+
         Command cmd = new Command("NAME", playerName);
         PlayerName = playerName;
         sendCommand(cmd);
         State = WebsocketState.NameSent;
         Debug.Log("name sent");
+        return true;
     }
 
     public void SendButton1Event(string state)

@@ -1709,7 +1709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 1522557231}
-  joinBtn: {fileID: 0}
+  joinBtn: {fileID: 1998739055}
+  waitingScreen: {fileID: 1071052063}
   ws: {fileID: 795937769}
   IPText: {fileID: 1165449249}
 --- !u!1 &1807332152
