@@ -11,12 +11,16 @@ public class VerticalWebSocket : WSClientBehaviour
     public string PlayerName {get; private set;}
 
 	// Use this for initialization
-
     void Start () {
-        string url = "ws://172.18.11.187:5001/Server";
-        State = WebsocketState.UnInitialized;
-        connect(url );
+        
     }
+
+    public override void connect(string url)
+    {
+        State = WebsocketState.UnInitialized;
+        base.connect(url );
+    }
+
 
     public override void handleCommand(Command c)
     {
@@ -42,12 +46,9 @@ public class VerticalWebSocket : WSClientBehaviour
         PlayerId = int.Parse(arg);
     }
 
-
-
     public override void onConnectionReady(object sender, EventArgs e)
     {
         base.onConnectionReady(sender, e);
-
     }
 
     public void SendName(string playerName)
