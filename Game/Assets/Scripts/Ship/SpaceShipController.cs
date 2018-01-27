@@ -46,7 +46,12 @@ public class SpaceShipController : MonoBehaviour {
             _TestPlayerControls = 2;
         if (Input.GetKeyDown("3"))
             _TestPlayerControls = 3;
-
+        if (Input.GetKeyDown("4"))
+            _TestPlayerControls = 4;
+        if (Input.GetKeyDown("5"))
+            _TestPlayerControls = 5;
+        if (Input.GetKeyDown("6"))
+            _TestPlayerControls = 6;
 
         if (_TestPlayerControls != -1)
         {

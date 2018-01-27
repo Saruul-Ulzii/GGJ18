@@ -12,7 +12,8 @@ public class LobbyPlayerEntry : MonoBehaviour
     public void AssignPlayer(Player player)
     {
         Player = player;
-        PlayerNameText.text = player.Name;
+        var name = player.Name == "" ? "Player " + player.Id : player.Name;
+        PlayerNameText.text = name;
         PlayerColorImage.color = player.Color;
     }
 
