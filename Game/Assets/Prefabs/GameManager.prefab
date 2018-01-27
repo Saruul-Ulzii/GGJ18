@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114693733605867432}
   - component: {fileID: 114652038529144806}
   - component: {fileID: 114602313319044254}
+  - component: {fileID: 114591085408864018}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -42,6 +43,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114591085408864018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1488418459459908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec9d5ba12014ae4f9e7b9cd09ed2087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Achievements:
+  - Name: Pressen!
+    Description: "Halte den Knopf f\xFCr mindestens 5 Sekunden gedr\xFCckt!"
+    Goal: 5
+    Time: 0
+    Points: 100
+    Datas: []
 --- !u!114 &114602313319044254
 MonoBehaviour:
   m_ObjectHideFlags: 1
