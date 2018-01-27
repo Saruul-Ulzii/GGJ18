@@ -12,8 +12,6 @@ public class AsteroidSpawner : MonoBehaviour {
 
     [SerializeField]
     Transform _SpaceShipTr;
-    [SerializeField]
-    AchievementManager _AchievementManager;
 
     float _InitialAsteroidSpawnsInSeconds = 5.0f;
     float _Difficulty = 1.0f;
@@ -50,7 +48,6 @@ public class AsteroidSpawner : MonoBehaviour {
             }
 
             var asteroid = asteroidGo.GetComponent<Asteroid>();
-            asteroid.AchivementManager = _AchievementManager;
             asteroid.Init(this, _SpawnerTransform, _SpaceShipTr, _SpawnDistance, _DestructionDistance, _Speed);
         }
     }
