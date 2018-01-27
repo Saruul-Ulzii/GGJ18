@@ -5,21 +5,19 @@ using UnityEngine;
 public class ButtonPressTimer : AchievementData
 {
     private bool _currentState;
+    private Dictionary<int, float> PlayerButtonCounts = new Dictionary<int, float>();
 
-    public void OnButtonState(bool pressed)
+    public void OnButtonState(bool pressed, int playerId)
     {
-        _currentState = pressed;
+
+        if (!pressed)
+        {
+            PlayerButtonCounts[playerId] += _value;
+        }
     }
 
     private void Update()
     {
-        if (!_currentState)
-        {
-            _value = 0;
-        }
-        else
-        {
-            _value += Time.deltaTime;
-        }
+        
     }
 }
