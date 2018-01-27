@@ -148,6 +148,8 @@ MonoBehaviour:
   PlayerColor: {r: 0.15862083, g: 1, b: 0, a: 1}
   MissionText: blablablablablab
   PlayerIndicator: B
+  MissionTextComponent: {fileID: 1555846177}
+  PlayerIndicatorComponent: {fileID: 779094544}
 --- !u!114 &93375493
 MonoBehaviour:
   m_ObjectHideFlags: 0
