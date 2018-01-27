@@ -19,15 +19,14 @@ public class SpaceShipController : MonoBehaviour {
     [SerializeField]
     Rigidbody _Rigidbody;
 
-    int _TestPlayerControls = 1;
+    private int _TestPlayerControls = 1;
+    private List<TriebwerkController> _EngineControllers = new List<TriebwerkController>();
 
-    private List<TriebwerkController> engineControllers = new List<TriebwerkController>();
 
-
-    private void Start()
+    void Start()
     {
-        engineControllers = new List<TriebwerkController>();
-        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(_PlayerCount, engineControllers);
+        _EngineControllers = new List<TriebwerkController>();
+        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(_PlayerCount, _EngineControllers);
     }
 
     void Update()
@@ -43,19 +42,11 @@ public class SpaceShipController : MonoBehaviour {
 
         if (Input.GetButton("Jump"))
         {
-            var tr = transform.GetChild(_TestPlayerControls);
-            var direction = (tr.rotation * Vector3.back);
-
-            var orig = tr.position - direction;
-            Debug.DrawLine(orig, orig + 3 * direction, Color.red);
-            _Rigidbody.AddForceAtPosition(0.1f * direction, orig, ForceMode.Impulse);
-
-            engineControllers[_TestPlayerControls - 1].On = true;
-            engineControllers[_TestPlayerControls - 1].Intensity = 0.5f;
+            RunEngine(_TestPlayerControls - 1);
         }
         else
         {
-            engineControllers[_TestPlayerControls - 1].On = false;
+            _EngineControllers[_TestPlayerControls - 1].On = false;
         }
         var hor = Input.GetAxis("Horizontal");
         if (hor < -float.Epsilon || hor > float.Epsilon)
@@ -66,5 +57,33 @@ public class SpaceShipController : MonoBehaviour {
             input.currentAngle = Mathf.Clamp(input.currentAngle + (hor * _RotationSpeed * Time.deltaTime), origAng - _DegreesOfFreedom, origAng + _DegreesOfFreedom);
             tr.localRotation = Quaternion.Euler(0, input.currentAngle, 0);
         }
+    }
+
+    public void RunCommand(Command command)
+    {
+        switch (command.CommandName)
+        {
+            case "button1":
+                RunEngine(command.Player.Id);
+                break;
+            case "button2":
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void RunEngine(int playerID)
+    {
+        var tr = transform.GetChild(_TestPlayerControls);
+        var direction = (tr.rotation * Vector3.back);
+
+        var orig = tr.position - direction;
+        Debug.DrawLine(orig, orig + 3 * direction, Color.red);
+        _Rigidbody.AddForceAtPosition(0.1f * direction, orig, ForceMode.Impulse);
+
+        int engineId = playerID % _EngineControllers.Count;
+        _EngineControllers[engineId].On = true;
+        _EngineControllers[engineId].Intensity = 0.5f;
     }
 }

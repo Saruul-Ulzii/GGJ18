@@ -48,7 +48,6 @@ public class SpaceshipGenerator : MonoBehaviour
 
             //Fabe und Intensität der Triebwerke setzten
             var engineController = engine.GetComponent<TriebwerkController>();
-            engineControllers.Add(engineController);
             engineController.PlayerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             engineController.Intensity = 0f;
             engineControllers.Add(engineController);
