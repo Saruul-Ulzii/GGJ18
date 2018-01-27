@@ -27,13 +27,7 @@ public class Player
     {
         get
         {
-            if (name == "")
-            {
-                var nameID = Id % PlayerValues.Instance.testNames.Count;
-                return PlayerValues.Instance.testNames[nameID];
-            }
-            
-            return name;
+            return name == "" ? "Player " + Id : name;
         }
         set
         {

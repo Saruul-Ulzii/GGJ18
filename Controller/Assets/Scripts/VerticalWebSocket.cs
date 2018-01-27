@@ -7,17 +7,59 @@ public class VerticalWebSocket : WSClientBehaviour
 
     public static Nullable<int> PlayerId {get; private set;}
     public string PlayerName {get; private set;}
+    
     public GameObject Button1;
     public GameObject WaitingScreen;
 
     private GameObject _currentInput;
 
-    public override void connect(string url)
+    private string _serverAddress;
+
+    private void Reconnect()
     {
-        State = WebsocketState.UnInitialized;
-        base.connect(url );
+        if(State != WebsocketState.Disconnected)
+        {
+            Debug.Log("cant reconnect - not disconnected");   
+        }
+        var retryCounter = 0;
+        do
+        {
+            retryCounter ++;
+            try
+            {
+                base.connect(_serverAddress);
+                var cmd = new Command("ID", PlayerId.ToString());
+                sendCommand(cmd);
+                State = WebsocketState.GameStarted;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log("Reconnect Error: " + ex + "\nretry nr " + retryCounter);
+            }
+            
+        } while (retryCounter <= 3);
+        State = WebsocketState.Failed;
     }
 
+    public void Update()
+    {
+        if(State == WebsocketState.Disconnected)
+            Reconnect();
+    }
+
+    public override void connect(string url)
+    {
+        _serverAddress = url;
+        State = WebsocketState.UnInitialized;
+        try
+        {
+            base.connect(url );
+        }
+        catch (System.Exception)
+        {
+            State = WebsocketState.Failed;
+        }
+    }
 
     public override void handleCommand(Command c)
     {
@@ -35,7 +77,6 @@ public class VerticalWebSocket : WSClientBehaviour
                 Debug.Log("unknown command!");
                 break;
 		}
-
     }
 
     private void HandleIdCommand(string arg)
@@ -67,6 +108,15 @@ public class VerticalWebSocket : WSClientBehaviour
     public override void onConnectionReady(object sender, EventArgs e)
     {
         base.onConnectionReady(sender, e);
+    }
+
+    public override void OnConnectionClose(object sender, EventArgs e)
+    {
+        base.OnConnectionClose(sender,e);
+        if(PlayerId.HasValue)
+            State = WebsocketState.Disconnected;
+        else
+            State = WebsocketState.Failed;
     }
 
     public bool SendName(string playerName)

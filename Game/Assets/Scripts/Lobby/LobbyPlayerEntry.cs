@@ -12,8 +12,7 @@ public class LobbyPlayerEntry : MonoBehaviour
     public void AssignPlayer(Player player)
     {
         Player = player;
-        var name = player.Name == "" ? "Player " + player.Id : player.Name;
-        PlayerNameText.text = name;
+        PlayerNameText.text = player.Name;
         PlayerColorImage.color = player.Color;
     }
 
@@ -22,5 +21,4 @@ public class LobbyPlayerEntry : MonoBehaviour
         PlayerNameText.text = player.Name;
         PlayerColorImage.color = player.Color;
     }
-
 }
