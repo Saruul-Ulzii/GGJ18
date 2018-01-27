@@ -15,14 +15,17 @@ public class Server : WebSocketBehavior
     public static string ServerUrl;
 
 	public static void Start() {
+
         var serverIp = ServiceDiscovery.GetIP();
         var address = "ws://" + serverIp + ":5001";
         var route = "/Server";
-        Debug.Log("Creating Websocket on " + address);
+        ServerUrl = address + route;
+        Debug.Log("Creating Websocket on " + ServerUrl);
+
         var wssv = new WebSocketServer(address);
         wssv.AddWebSocketService<Server>(route);
         wssv.Start();
-        ServerUrl = address + route;
+        
         _socketServer = wssv;
     }
 
@@ -41,6 +44,7 @@ public class Server : WebSocketBehavior
     {
         if(_socketServer != null)
         {
+            Debug.Log("Stopping Websocket Server..");
             _socketServer.Stop();            
         }
     }
@@ -48,7 +52,7 @@ public class Server : WebSocketBehavior
     protected override void OnMessage(MessageEventArgs e)
     {
         var data = e.Data.Split(';');
-        if (data.Length != 2)
+        if (data.Length < 2)
         {
             Send("Not a valid command: " + e.Data);
         }
