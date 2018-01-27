@@ -12,6 +12,9 @@ public class AddressQrReader : MonoBehaviour {
 	private WebCamTexture camTexture;
 	private Rect screenRect;
 
+	public VericalWebSocket Ws;
+	public GameObject Next;
+
 	void Start() 
 	{
 		screenRect = new Rect(0, 0, Screen.width, Screen.height);
@@ -36,7 +39,9 @@ public class AddressQrReader : MonoBehaviour {
 			camTexture.width, camTexture.height);
 			if (result != null) 
 			{
-				Debug.Log("DECODED TEXT FROM QR: " + result.Text);
+				Next.SetActive(true);
+				gameObject.SetActive(false);
+				Ws.connect(result.Text);
 			}
 
 		} catch(Exception ex) 
