@@ -16,4 +16,18 @@ public class Player
             return color;
         }
     }
+
+    public static bool operator==(Player p1, Player p2)
+    {
+        if (ReferenceEquals(p1, p2)) return true;
+        if (p1 == null || p2 == null) return false;
+        return p1.Id == p2.Id;
+    }
+
+    public static bool operator !=(Player p1, Player p2)
+    {
+        if (ReferenceEquals(p1, p2)) return false;
+        if (p1 == null || p2 == null) return true;
+        return p1.Id != p2.Id;
+    }
 }
