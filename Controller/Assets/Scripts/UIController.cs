@@ -12,17 +12,22 @@ public class UIController : MonoBehaviour
 
     public string PlayerIndicator;
 
+	public Text MissionTextComponent;
+	public Text PlayerIndicatorComponent;
+	public Button EngineButton;
+	public Image ButtonCenterImage;
+
 	// Use this for initialization
 	void Start ()
 	{
-	    // transform.Find("MissionText").GetComponent<Text>().text = MissionText;
-	    // transform.Find("EngineButton").GetComponentInChildren<Text>().text = PlayerIndicator;
+	    MissionTextComponent.text = MissionText;
+	    PlayerIndicatorComponent.text = PlayerIndicator;
 
-	    // var colors = transform.Find("EngineButton").GetComponent<Button>().colors;
-	    // colors.pressedColor = PlayerColor;
-	    // transform.Find("EngineButton").GetComponent<Button>().colors = colors;
+	    var colors = EngineButton.colors;
+	    colors.pressedColor = PlayerColor;
+	    EngineButton.colors = colors;
 
-	    // transform.Find("EngineButton").transform.Find("Center").GetComponent<Image>().color = PlayerColor; //TODO funktioniert noch nicht #julius
+	    ButtonCenterImage.color = PlayerColor; //TODO funktioniert noch nicht #julius
 	}
 	
 	// Update is called once per frame
