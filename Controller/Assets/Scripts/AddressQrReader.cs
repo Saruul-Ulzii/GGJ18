@@ -12,7 +12,7 @@ public class AddressQrReader : MonoBehaviour {
 	private WebCamTexture camTexture;
 	private Rect screenRect;
 
-	public VericalWebSocket Ws;
+	public VerticalWebSocket Ws;
 	public GameObject Next;
 
 	void Start() 
