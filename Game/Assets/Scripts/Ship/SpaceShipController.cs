@@ -23,10 +23,13 @@ public class SpaceShipController : MonoBehaviour {
 
     private Dictionary<Player, bool> _engineState = new Dictionary<Player, bool>();
 
+    [SerializeField]
+    int _TestPlayerControls = -1;
+    
     void Start()
     {
         _EngineControllers = new List<TriebwerkController>();
-        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Server.Players.Count, _EngineControllers);
+        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(3, Server.Players.Count), _EngineControllers);
     }
 
     void Update()
@@ -36,32 +39,29 @@ public class SpaceShipController : MonoBehaviour {
             RunEngine(kv.Key.Id, kv.Value);
         }
 
-        //if (Input.GetKeyDown("1"))
-        //    _TestPlayerControls = 1;
+        if (Input.GetKeyDown("1"))
+            _TestPlayerControls = 1;
+        if (Input.GetKeyDown("2"))
+            _TestPlayerControls = 2;
+        if (Input.GetKeyDown("3"))
+            _TestPlayerControls = 3;
 
-        //if (Input.GetKeyDown("2"))
-        //    _TestPlayerControls = 2;
 
-        //if (Input.GetKeyDown("3"))
-        //    _TestPlayerControls = 3;
+        if (_TestPlayerControls != -1)
+        {
+            RunEngine(_TestPlayerControls - 1, Input.GetButton("Jump"));
 
-        //if (Input.GetButton("Jump"))
-        //{
-        //    RunEngine(_TestPlayerControls - 1);
-        //}
-        //else
-        //{
-        //    _EngineControllers[_TestPlayerControls - 1].On = false;
-        //}
-        //var hor = Input.GetAxis("Horizontal");
-        //if (hor < -float.Epsilon || hor > float.Epsilon)
-        //{
-        //    var tr = transform.GetChild(_TestPlayerControls);
-        //    var input = _PlayerInputs[_TestPlayerControls - 1];
-        //    var origAng = input.originalAngle;
-        //    input.currentAngle = Mathf.Clamp(input.currentAngle + (hor * _RotationSpeed * Time.deltaTime), origAng - _DegreesOfFreedom, origAng + _DegreesOfFreedom);
-        //    tr.localRotation = Quaternion.Euler(0, input.currentAngle, 0);
-        //}
+            var hor = Input.GetAxis("Horizontal");
+            if (hor < -float.Epsilon || hor > float.Epsilon)
+            {
+                var tr = transform.GetChild(_TestPlayerControls);
+                var input = _PlayerInputs[_TestPlayerControls - 1];
+                var origAng = input.originalAngle;
+                input.currentAngle = Mathf.Clamp(input.currentAngle + (hor * _RotationSpeed * Time.deltaTime), origAng - _DegreesOfFreedom, origAng + _DegreesOfFreedom);
+                tr.localRotation = Quaternion.Euler(0, input.currentAngle, 0);
+            }
+        }
+
     }
 
     public void RunCommand(Command command)
