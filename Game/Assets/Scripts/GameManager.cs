@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public void StartLobby()
     {
         GameState = GameStates.Lobby;
+        Server.Stop();
         Server.Start(HostWebsocketLocal);
         UpdateUi();
     }

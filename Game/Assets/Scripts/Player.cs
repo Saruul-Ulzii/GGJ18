@@ -7,6 +7,9 @@ public class Player
     public Texture2D Photo;
     public Server Server;
 
+    public bool? ButtonState;
+    public int CommandCount;
+
     public Color Color
     {
         get

@@ -567,21 +567,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114251011158819470, guid: 112a1f3056afbb64eba76e3f80f1b349,
-        type: 2}
-      propertyPath: ShipLife
-      value: 
-      objectReference: {fileID: 413005975}
     - target: {fileID: 223019941685859356, guid: 112a1f3056afbb64eba76e3f80f1b349,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1025105881}
-    - target: {fileID: 224613062223419318, guid: 112a1f3056afbb64eba76e3f80f1b349,
+    - target: {fileID: 114251011158819470, guid: 112a1f3056afbb64eba76e3f80f1b349,
         type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -10
-      objectReference: {fileID: 0}
+      propertyPath: ShipLife
+      value: 
+      objectReference: {fileID: 413005975}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a1f3056afbb64eba76e3f80f1b349, type: 2}
   m_IsPrefabParent: 0
