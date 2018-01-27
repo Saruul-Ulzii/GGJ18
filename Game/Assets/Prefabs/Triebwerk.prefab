@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 23894890193717610}
   - component: {fileID: 114195709524773538}
   - component: {fileID: 65554199458540580}
+  - component: {fileID: 136705757228565574}
   m_Layer: 0
   m_Name: Triebwerk
   m_TagString: Untagged
@@ -172,6 +173,19 @@ MonoBehaviour:
   PlayerColor: {r: 0, g: 1, b: 0.17241383, a: 0}
   On: 0
   Intensity: 1
+--- !u!136 &136705757228565574
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622085600549116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 2.3
+  m_Height: 0.999375
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.0000005066395, z: 0.96215}
 --- !u!198 &198255082433404850
 ParticleSystem:
   m_ObjectHideFlags: 1

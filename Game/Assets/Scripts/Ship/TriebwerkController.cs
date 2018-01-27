@@ -74,4 +74,9 @@ public class TriebwerkController : MonoBehaviour
 
         return g;
     }
+
+    void OnTriggerExit(Collider other)
+    {
+        GetComponentInParent<SpaceShipController>().CloseHit();
+    }
 }

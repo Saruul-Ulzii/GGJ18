@@ -88,3 +88,4 @@ public class AchievementManager : MonoBehaviour
 // RELEASETIME (Player)
 // BURNEDASTEROIDS
 // HITS (Asteroids)
+// CLOSEHITS 
