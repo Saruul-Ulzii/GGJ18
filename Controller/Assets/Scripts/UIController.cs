@@ -17,8 +17,18 @@ public class UIController : MonoBehaviour
 	public Button EngineButton;
 	public Image ButtonCenterImage;
 
-	// Use this for initialization
-	void Start ()
+    public bool CallSuccess = true;
+    public bool CallFail = true;
+
+    public GameObject FailNotification;
+    public GameObject SuccesNotification;
+    // starting value for the Lerp
+    static float t = 0.0f;
+
+    private Vector3 NotificationStartPos;
+
+    // Use this for initialization
+    void Start ()
 	{
 	    MissionTextComponent.text = MissionText;
 	    PlayerIndicatorComponent.text = PlayerIndicator;
@@ -27,11 +37,42 @@ public class UIController : MonoBehaviour
 	    colors.pressedColor = PlayerColor;
 	    EngineButton.colors = colors;
 
-	    ButtonCenterImage.color = PlayerColor; //TODO funktioniert noch nicht #julius
+	    ButtonCenterImage.color = PlayerColor;
+
+	    NotificationStartPos = SuccesNotification.transform.position;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+	    if (CallSuccess)
+	    {
+	        triggerNotification(SuccesNotification);
+	    }
+	    if (CallFail)
+	    {
+	        triggerNotification(FailNotification);
+	    }
+    }
+
+    private void triggerNotification(GameObject notification)
+    {
+        notification.SetActive(true);
+        // animate the position of the game object...
+        Vector3 pos = NotificationStartPos;
+        pos.y = Mathf.Lerp(pos.y + 100, pos.y , t);
+        notification.transform.position = pos;
+
+        // .. and increate the t interpolater
+        t += 0.5f * Time.deltaTime;
+
+        if (t > 1.0f)
+        {
+            t = 0;
+            CallSuccess = false;
+            CallFail = false;
+            notification.transform.position = NotificationStartPos;
+            notification.SetActive(false);
+        }
+    }
 }
