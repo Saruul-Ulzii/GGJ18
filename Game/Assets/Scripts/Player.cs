@@ -30,4 +30,16 @@ public class Player
         if (p1 == null || p2 == null) return true;
         return p1.Id != p2.Id;
     }
+
+    public override bool Equals(object obj)
+    {
+        var player = obj as Player;
+        if (player == null) return false;
+        return this == player;
+    }
+
+    public override int GetHashCode()
+    {
+        return Id;
+    }
 }
