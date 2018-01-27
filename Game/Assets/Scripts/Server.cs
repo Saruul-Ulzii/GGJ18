@@ -36,7 +36,7 @@ public class Server : WebSocketBehavior
         _player = new Player
         {
             Id = GetNextValidId(),
-            Server = this
+            Server = this,            
         };
         Players.Add(_player);
         Debug.Log("Registerd player with ID: " + _player.Id);

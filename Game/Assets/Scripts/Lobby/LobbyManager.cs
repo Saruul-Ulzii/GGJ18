@@ -60,6 +60,6 @@ public class LobbyManager : MonoBehaviour
 
     private void UpdateStartButton()
     {
-        StartButton.interactable = LobbyPlayer.Count >= GameManager.MinPlayer;  
+        StartButton.interactable = LobbyPlayer.Count >= GameManager.Instance.MinPlayer;  
     }
 }

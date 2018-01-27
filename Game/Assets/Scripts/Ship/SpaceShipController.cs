@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpaceShipController : MonoBehaviour {
@@ -29,7 +30,7 @@ public class SpaceShipController : MonoBehaviour {
     void Start()
     {
         _EngineControllers = new List<TriebwerkController>();
-        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(3, Server.Players.Count), _EngineControllers);
+        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(_PlayerCount, Server.Players.Count), _EngineControllers);
     }
 
     void Update()
@@ -45,7 +46,12 @@ public class SpaceShipController : MonoBehaviour {
             _TestPlayerControls = 2;
         if (Input.GetKeyDown("3"))
             _TestPlayerControls = 3;
-
+        if (Input.GetKeyDown("4"))
+            _TestPlayerControls = 4;
+        if (Input.GetKeyDown("5"))
+            _TestPlayerControls = 5;
+        if (Input.GetKeyDown("6"))
+            _TestPlayerControls = 6;
 
         if (_TestPlayerControls != -1)
         {
@@ -71,6 +77,7 @@ public class SpaceShipController : MonoBehaviour {
         switch (command.CommandName)
         {
             case "button1":
+                command.Player.StateUpdateTime = GameManager.Instance.ResetStateTime;
                 var data = command.Data.ToLower();
                 if (data == "pressed") _engineState[command.Player] = true;
                 if (data == "released") _engineState[command.Player] = false;                
@@ -79,6 +86,34 @@ public class SpaceShipController : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void ResetState(Player player)
+    {
+        if (!_engineState.ContainsKey(player))
+        {
+            _engineState.Add(player, false);
+        }
+        else
+        {
+            _engineState[player] = false;
+        }
+    }
+
+    public void RemoveMissingPlayers(List<Player> player)
+    {
+        var missing = new List<Player>();
+        foreach (var kv in _engineState)
+        {
+            if(!player.Any(p => p == kv.Key))
+            {
+                missing.Add(kv.Key);
+            }
+        }
+        foreach (var person in missing)
+        {
+            _engineState.Remove(person);
         }
     }
 
