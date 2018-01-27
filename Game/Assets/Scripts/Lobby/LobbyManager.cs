@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;   
 
 public class LobbyManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class LobbyManager : MonoBehaviour
     public Transform PlayerEntryListTransform;
 
     public List<LobbyPlayerEntry> LobbyPlayer;
+    public Button StartButton;
 
     private void Start()
     {
@@ -38,6 +40,7 @@ public class LobbyManager : MonoBehaviour
         var entry = instance.GetComponent<LobbyPlayerEntry>();
         entry.AssignPlayer(player);
         LobbyPlayer.Add(entry);
+        UpdateStartButton();
     }
 
     public void UpdatePlayer(Player player)
@@ -50,5 +53,12 @@ public class LobbyManager : MonoBehaviour
     {
         var entry = LobbyPlayer.FirstOrDefault(p => p.Player == player);
         Destroy(entry.gameObject);
+        UpdateStartButton();
+    }
+
+
+    private void UpdateStartButton()
+    {
+        StartButton.interactable = LobbyPlayer.Count >= GameManager.MinPlayer;  
     }
 }
