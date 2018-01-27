@@ -43,6 +43,7 @@ public class VerticalWebSocket : WSClientBehaviour
             Debug.Log("Wrong context for command");
             return;
         }
+        Debug.Log("Received ID");
         State = WebsocketState.Initialized;
         PlayerId = int.Parse(arg);
         Button1.SetActive(true);
@@ -58,6 +59,8 @@ public class VerticalWebSocket : WSClientBehaviour
         Command cmd = new Command("NAME", playerName);
         PlayerName = playerName;
         sendCommand(cmd);
+        State = WebsocketState.NameSent;
+        Debug.Log("name sent");
     }
 
     public void SendButton1Event(string state)

@@ -21,8 +21,9 @@ public class WSClientBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach ( Command c in commandQueue)
+        while(commandQueue.Count > 0)
         {
+            var c = commandQueue.Dequeue();
             handleCommand(c);
         }
 	}
