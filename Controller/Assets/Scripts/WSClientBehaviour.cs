@@ -64,7 +64,6 @@ public class WSClientBehaviour : MonoBehaviour {
         {
             Debug.Log("Error: " + ex);
         }
-        //throw new System.NotImplementedException();
     }
 
     protected void sendCommand( Command message )
