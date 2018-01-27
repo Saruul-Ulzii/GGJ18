@@ -156,6 +156,7 @@ MonoBehaviour:
   CallFail: 0
   FailNotification: {fileID: 230109320}
   SuccesNotification: {fileID: 1807332152}
+  NotificationWaitTime: 2
 --- !u!114 &93375493
 MonoBehaviour:
   m_ObjectHideFlags: 0

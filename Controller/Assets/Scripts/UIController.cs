@@ -22,6 +22,8 @@ public class UIController : MonoBehaviour
 
     public GameObject FailNotification;
     public GameObject SuccesNotification;
+
+    public float NotificationWaitTime = 2.0f;
     // starting value for the Lerp
     static float t = 0.0f;
 
@@ -47,15 +49,15 @@ public class UIController : MonoBehaviour
 	void Update () {
 	    if (CallSuccess)
 	    {
-	        triggerNotification(SuccesNotification);
+	        TriggerNotification(SuccesNotification);
 	    }
 	    if (CallFail)
 	    {
-	        triggerNotification(FailNotification);
+	        TriggerNotification(FailNotification);
 	    }
     }
 
-    private void triggerNotification(GameObject notification)
+    private void TriggerNotification(GameObject notification)
     {
         notification.SetActive(true);
         // animate the position of the game object...
@@ -71,8 +73,15 @@ public class UIController : MonoBehaviour
             t = 0;
             CallSuccess = false;
             CallFail = false;
-            notification.transform.position = NotificationStartPos;
-            notification.SetActive(false);
+            StartCoroutine(DeactivateNotifications(notification));
+            
         }
+    }
+
+    private IEnumerator DeactivateNotifications(GameObject notification)
+    {
+        yield return new WaitForSeconds(NotificationWaitTime);
+        notification.transform.position = NotificationStartPos;
+        notification.SetActive(false);
     }
 }
