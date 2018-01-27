@@ -12,7 +12,7 @@ public class ApplyAddress : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+		inputField.text = "ws://172.18.11.190:5001/Server";
 	}
 	
 	// Update is called once per frame

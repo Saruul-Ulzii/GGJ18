@@ -73,11 +73,11 @@ public class Server : WebSocketBehavior
                 Send("ID;" + _player.Id.ToString());
                 break;
             case "button1":
-                Debug.Log(string.Format("Player {0} pressed button 1", command.Player.Id));
+                Debug.Log(string.Format("Player {0} {1} button 1", command.Player.Id, command.Data.ToLower()));
                 Commands.Enqueue(command);
                 break;
             case "button2":
-                Debug.Log(string.Format("Player {0} pressed button 2", command.Player.Id));
+                Debug.Log(string.Format("Player {0} {1} button 2", command.Player.Id, command.Data.ToLower()));
                 Commands.Enqueue(command);
                 break;
             default:
