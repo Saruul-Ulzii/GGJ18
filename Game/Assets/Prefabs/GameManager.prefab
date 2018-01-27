@@ -663,6 +663,7 @@ MonoBehaviour:
   StartUiRoot: {fileID: 1037732091811494}
   LobbyUiRoot: {fileID: 1152891785079042}
   HostWebsocketLocal: 1
+  GameScene: game
 --- !u!114 &114701178600784050
 MonoBehaviour:
   m_ObjectHideFlags: 1

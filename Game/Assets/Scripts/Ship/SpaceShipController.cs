@@ -22,6 +22,7 @@ public class SpaceShipController : MonoBehaviour {
     private int _TestPlayerControls = 1;
     private List<TriebwerkController> _EngineControllers = new List<TriebwerkController>();
 
+    private Dictionary<Player, bool> _engineState = new Dictionary<Player, bool>();
 
     void Start()
     {
@@ -31,40 +32,49 @@ public class SpaceShipController : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown("1"))
-            _TestPlayerControls = 1;
-
-        if (Input.GetKeyDown("2"))
-            _TestPlayerControls = 2;
-
-        if (Input.GetKeyDown("3"))
-            _TestPlayerControls = 3;
-
-        if (Input.GetButton("Jump"))
+        foreach (var kv in _engineState)
         {
-            RunEngine(_TestPlayerControls - 1);
+            RunEngine(kv.Key.Id, kv.Value);
         }
-        else
-        {
-            _EngineControllers[_TestPlayerControls - 1].On = false;
-        }
-        var hor = Input.GetAxis("Horizontal");
-        if (hor < -float.Epsilon || hor > float.Epsilon)
-        {
-            var tr = transform.GetChild(_TestPlayerControls);
-            var input = _PlayerInputs[_TestPlayerControls - 1];
-            var origAng = input.originalAngle;
-            input.currentAngle = Mathf.Clamp(input.currentAngle + (hor * _RotationSpeed * Time.deltaTime), origAng - _DegreesOfFreedom, origAng + _DegreesOfFreedom);
-            tr.localRotation = Quaternion.Euler(0, input.currentAngle, 0);
-        }
+
+        //if (Input.GetKeyDown("1"))
+        //    _TestPlayerControls = 1;
+
+        //if (Input.GetKeyDown("2"))
+        //    _TestPlayerControls = 2;
+
+        //if (Input.GetKeyDown("3"))
+        //    _TestPlayerControls = 3;
+
+        //if (Input.GetButton("Jump"))
+        //{
+        //    RunEngine(_TestPlayerControls - 1);
+        //}
+        //else
+        //{
+        //    _EngineControllers[_TestPlayerControls - 1].On = false;
+        //}
+        //var hor = Input.GetAxis("Horizontal");
+        //if (hor < -float.Epsilon || hor > float.Epsilon)
+        //{
+        //    var tr = transform.GetChild(_TestPlayerControls);
+        //    var input = _PlayerInputs[_TestPlayerControls - 1];
+        //    var origAng = input.originalAngle;
+        //    input.currentAngle = Mathf.Clamp(input.currentAngle + (hor * _RotationSpeed * Time.deltaTime), origAng - _DegreesOfFreedom, origAng + _DegreesOfFreedom);
+        //    tr.localRotation = Quaternion.Euler(0, input.currentAngle, 0);
+        //}
     }
 
     public void RunCommand(Command command)
     {
+        if (!_engineState.ContainsKey(command.Player)) _engineState.Add(command.Player, false);
+
         switch (command.CommandName)
         {
             case "button1":
-                RunEngine(command.Player.Id);
+                var data = command.Data.ToLower();
+                if (data == "pressed") _engineState[command.Player] = true;
+                if (data == "released") _engineState[command.Player] = false;                
                 break;
             case "button2":
                 break;
@@ -73,17 +83,20 @@ public class SpaceShipController : MonoBehaviour {
         }
     }
 
-    private void RunEngine(int playerID)
+    private void RunEngine(int playerID, bool pressed)
     {
-        var tr = transform.GetChild(_TestPlayerControls);
-        var direction = (tr.rotation * Vector3.back);
+        if (pressed)
+        {
+            var tr = transform.GetChild(_TestPlayerControls);
+            var direction = (tr.rotation * Vector3.back);
 
-        var orig = tr.position - direction;
-        Debug.DrawLine(orig, orig + 3 * direction, Color.red);
-        _Rigidbody.AddForceAtPosition(0.1f * direction, orig, ForceMode.Impulse);
+            var orig = tr.position - direction;
+            Debug.DrawLine(orig, orig + 3 * direction, Color.red);
+            _Rigidbody.AddForceAtPosition(0.1f * direction, orig, ForceMode.Impulse);
+        }
 
         int engineId = playerID % _EngineControllers.Count;
-        _EngineControllers[engineId].On = true;
+        _EngineControllers[engineId].On = pressed;
         _EngineControllers[engineId].Intensity = 0.5f;
     }
 }
