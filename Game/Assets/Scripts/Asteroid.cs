@@ -8,8 +8,6 @@ public class Asteroid : MonoBehaviour
 
     Transform _Transform;
 
-    public GameObject AchivementManager;
-
     internal void Init(AsteroidSpawner asteroidSpawner, Transform spawnerTransform, Transform spaceShipTr, float spawnDistance, float destructionDistance, float speed)
     {
         _Spawner = asteroidSpawner;
@@ -43,8 +41,8 @@ public class Asteroid : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        float hits = AchivementManager.GetComponent<AchievementManager>().GetData("HITS");
-        AchivementManager.GetComponent<AchievementManager>().SetData("HITS", hits+1);
+        float hits = AchievementManager.Instance.GetData("HITS");
+        AchievementManager.Instance.SetData("HITS", hits+1);
 
         Destroy();
     }

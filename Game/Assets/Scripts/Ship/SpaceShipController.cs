@@ -154,9 +154,9 @@ public class SpaceShipController : MonoBehaviour {
 
     public void CloseHit()
     {
-        AchievementManager achvManager = AchievementManager.GetComponent<AchievementManager>();
-        float closeHits = achvManager.GetData("CLOSEHITS");
+        
+        float closeHits = AchievementManager.Instance.GetData("CLOSEHITS");
         closeHits += 1;
-        achvManager.SetData("CLOSEHITS", closeHits);
+        AchievementManager.Instance.SetData("CLOSEHITS", closeHits);
     }
 }
