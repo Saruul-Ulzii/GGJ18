@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1768243084176532}
+  m_IsPrefabParent: 1
+--- !u!1 &1768243084176532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4981935062362802}
+  - component: {fileID: 114284744770395160}
+  m_Layer: 0
+  m_Name: AchievmentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4981935062362802
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768243084176532}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 102.08849, y: -36.99678, z: 84.125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114284744770395160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768243084176532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec9d5ba12014ae4f9e7b9cd09ed2087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Achievements:
+  - Name: Speed
+    Description: Fly at least 100 km/h!
+    Time: 0
+    Points: 100
+    Goals:
+    - IsPlayerGoal: 0
+      PlayerId: 0
+      Id: SPEED
+      Goal: 100
+  - Name: Be toxic!
+    Description: Let your trusters on for 15 seconds!
+    Time: 0
+    Points: 100
+    Goals:
+    - IsPlayerGoal: 1
+      PlayerId: 0
+      Id: PRESSTIME
+      Goal: 15
+  - Name: Be stupid!
+    Description: Don't touch anything for 15 seconds!
+    Time: 0
+    Points: 100
+    Goals:
+    - IsPlayerGoal: 1
+      PlayerId: 0
+      Id: RELEASETIME
+      Goal: 15
+  - Name: Got'em!
+    Description: Burn 3 Asteroids with yopur thrusters!
+    Time: 0
+    Points: 0
+    Goals:
+    - IsPlayerGoal: 1
+      PlayerId: 0
+      Id: BURNEDASTEROIDS
+      Goal: 3
+  - Name: Just don't care!
+    Description: Hit 2 Asteroids!
+    Time: 0
+    Points: 0
+    Goals:
+    - IsPlayerGoal: 0
+      PlayerId: 0
+      Id: HITS
+      Goal: 2

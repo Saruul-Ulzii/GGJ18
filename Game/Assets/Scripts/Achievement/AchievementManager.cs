@@ -59,15 +59,15 @@ public class AchievementManager : MonoBehaviour
         return 0;
     }
 
-    //public List<Achievement> Achievements;
+    public List<Achievement> Achievements;
 
-    //public Achievement GetNextAchievement()
-    //{
-    //    if (Achievements.Count == 0) return null;
+    public Achievement GetNextAchievement(int playerId)
+    {
+        if (Achievements.Count == 0) return null;
 
-    //    var index = Random.Range(0, Achievements.Count);
-    //    return Achievements[index];
-    //} 
+        var index = Random.Range(0, Achievements.Count);
+        return Achievements[index].Clone(playerId);
+    }
 
     public struct StringPlayerId
     {
@@ -81,3 +81,10 @@ public class AchievementManager : MonoBehaviour
         }
     }
 }
+
+
+// SPEED
+// PRESSTIME (Player)
+// RELEASETIME (Player)
+// BURNEDASTEROIDS
+// HITS (Asteroids)
