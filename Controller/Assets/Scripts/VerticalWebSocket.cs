@@ -107,7 +107,7 @@ public class VerticalWebSocket : WSClientBehaviour
     public override void OnConnectionClose(object sender, EventArgs e)
     {
         base.OnConnectionClose(sender,e);
-        if(PlayerId.hasValue)
+        if(PlayerId.HasValue)
             State = WebsocketState.Disconnected;
         else
             State = WebsocketState.UnInitialized;
