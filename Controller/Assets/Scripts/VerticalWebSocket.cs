@@ -67,5 +67,6 @@ public class VerticalWebSocket : WSClientBehaviour
     {
         var cmd = new Command("BUTTON1", state);
         sendCommand(cmd);
+        Debug.Log("button1," + state + " sent");
     }
 }
