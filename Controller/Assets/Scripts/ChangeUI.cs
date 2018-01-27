@@ -26,6 +26,7 @@ public class ChangeUI : MonoBehaviour {
             Debug.Log("Please enter name!");
             return;
         }
+
         inputField.gameObject.SetActive(false);
         enterTextButton.SetActive(false);
         ws.SendName(inputField.text);
