@@ -40,6 +40,8 @@ public class WSClientBehaviour : MonoBehaviour {
 
     public virtual void connect( string url )
     {
+        Debug.Log("Trying to connect to \"" + url + "\"");
+
         webSocket = new WebSocket(url);
         webSocket.OnMessage += handleMessage;
         webSocket.OnOpen += (s, e) => { webServerReady = true; };
