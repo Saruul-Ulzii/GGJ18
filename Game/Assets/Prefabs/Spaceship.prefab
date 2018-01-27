@@ -261,6 +261,7 @@ MonoBehaviour:
   _PlayerCount: 3
   _DegreesOfFreedom: 45
   _RotationSpeed: 60
+  AchievementManager: {fileID: 0}
   _Rigidbody: {fileID: 54169504072576226}
   _TestPlayerControls: -1
 --- !u!114 &114866925668062144
