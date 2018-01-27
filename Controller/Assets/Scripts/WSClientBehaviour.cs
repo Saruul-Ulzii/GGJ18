@@ -53,14 +53,8 @@ public class WSClientBehaviour : MonoBehaviour {
         webSocket.OnMessage += handleMessage;
         webSocket.OnOpen += onConnectionReady;
         webSocket.OnClose += OnConnectionClose;
-        try
-        {
-            webSocket.Connect();
-        } catch ( Exception e)
-        {
-            Debug.Log("Error: " + e);
-        }
         
+        webSocket.Connect();
     }
 
     private void handleMessage(object sender, MessageEventArgs e)

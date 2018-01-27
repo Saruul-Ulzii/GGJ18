@@ -30,7 +30,7 @@ public class VerticalWebSocket : WSClientBehaviour
                 base.connect(_serverAddress);
                 var cmd = new Command("ID", PlayerId.ToString());
                 sendCommand(cmd);
-                State = WebsocketState.Initialized;
+                State = WebsocketState.GameStarted;
             }
             catch (System.Exception ex)
             {
@@ -38,7 +38,7 @@ public class VerticalWebSocket : WSClientBehaviour
             }
             
         } while (retryCounter <= 3);
-        State = WebsocketState.UnInitialized;
+        State = WebsocketState.Failed;
     }
 
     public void Update()
@@ -51,7 +51,14 @@ public class VerticalWebSocket : WSClientBehaviour
     {
         _serverAddress = url;
         State = WebsocketState.UnInitialized;
-        base.connect(url );
+        try
+        {
+            base.connect(url );
+        }
+        catch (System.Exception)
+        {
+            State = WebsocketState.Failed;
+        }
     }
 
     public override void handleCommand(Command c)
@@ -70,7 +77,6 @@ public class VerticalWebSocket : WSClientBehaviour
                 Debug.Log("unknown command!");
                 break;
 		}
-
     }
 
     private void HandleIdCommand(string arg)
@@ -110,7 +116,7 @@ public class VerticalWebSocket : WSClientBehaviour
         if(PlayerId.HasValue)
             State = WebsocketState.Disconnected;
         else
-            State = WebsocketState.UnInitialized;
+            State = WebsocketState.Failed;
     }
 
     public bool SendName(string playerName)
