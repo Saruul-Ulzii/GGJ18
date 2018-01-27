@@ -6,6 +6,9 @@ public class Commander : MonoBehaviour
 
 	void Update ()
     {
+        if (GameManager.Instance == null)
+            return;
+
         if (GameManager.Instance.GameState == GameStates.Game)
         {
             while (Server.Commands.Count > 0)
