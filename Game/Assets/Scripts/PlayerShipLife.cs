@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerShipLife : MonoBehaviour
 {
@@ -22,6 +24,10 @@ public class PlayerShipLife : MonoBehaviour
     void OnCollisionEnter () {
         CurrentLife -= 10;
 
+        if (CurrentLife < 0)
+        {
+            SceneManager.LoadScene("LoosingScreen");
+        }
     }
 	
 }
