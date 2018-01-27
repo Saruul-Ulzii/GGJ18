@@ -57,4 +57,10 @@ public class VerticalWebSocket : WSClientBehaviour
         PlayerName = playerName;
         sendCommand(cmd);
     }
+
+    public void SendButton1Event(string state)
+    {
+        var cmd = new Command("BUTTON1", state);
+        sendCommand(cmd);
+    }
 }
