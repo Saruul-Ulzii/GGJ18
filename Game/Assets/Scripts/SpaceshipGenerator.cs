@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpaceshipGenerator : MonoBehaviour
@@ -33,6 +34,7 @@ public class SpaceshipGenerator : MonoBehaviour
     float rotationSpeed = 60.0f;
 
     int _TestPlayerControls;
+    private List<TriebwerkController> engineControllers = new List<TriebwerkController>(); 
 
     void Start () {
         GenerateSpaceship();
@@ -57,6 +59,11 @@ public class SpaceshipGenerator : MonoBehaviour
             var orig = tr.position - direction;
             Debug.DrawLine(orig, orig + 3*direction, Color.red);
             _Rigidbody.AddForceAtPosition(0.1f* direction, orig, ForceMode.Impulse);
+            engineControllers[_TestPlayerControls].Intensity = Mathf.Lerp(0, 1f, 0.5f * Time.deltaTime);
+        }
+        else
+        {
+            engineControllers[_TestPlayerControls].Intensity = 0; 
         }
         var hor = Input.GetAxis("Horizontal");
         if (hor< -float.Epsilon || hor > float.Epsilon)
@@ -103,7 +110,14 @@ public class SpaceshipGenerator : MonoBehaviour
             _PlayerInputs[i] = new PlayerInputRestrictions(currentAngle);
             engineTr.localRotation = Quaternion.Euler(0, currentAngle, 0);
 
-            currentAngle += angleBetweenPlayerModules;            
+            currentAngle += angleBetweenPlayerModules;
+
+            //Fabe und Intensität der Triebwerke setzten
+            var engineController = engine.GetComponent<TriebwerkController>();
+            engineControllers.Add(engineController);
+            engineController.PlayerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            engineController.Intensity = 0f;
+
         }
 
         verts[_PlayerCount] = new Vector3(0, 0.5f, 0);
