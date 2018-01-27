@@ -5,5 +5,6 @@ public enum WebsocketState
     Initialized,
     GameStarted,
     GameStopped,
-    Disconnected
+    Disconnected,
+    Failed
 }

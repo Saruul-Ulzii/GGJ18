@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public bool HostWebsocketLocal;
     public string GameScene;
 
+    private Dictionary<Player, Achievement> _playerAchievements = new Dictionary<Player, Achievement>();
+
     private void Awake()
     {
         Instance = this;
@@ -40,9 +42,17 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         GameState = GameStates.Game;
+        UpdateUi();
         SceneManager.LoadScene(GameScene);
         Server.StartGame();
-        UpdateUi();
+
+        _playerAchievements = new Dictionary<Player, Achievement>();
+        foreach (var player in Server.Players)
+        {
+            var a = AchievementManager.Instance.GetNextAchievement(player.Id);
+            _playerAchievements.Add(player, a);
+            Server.SendPlayerMessage(player, new Command(player, "MISSION", a.Name + "\n" + a.Description));
+        }
     }
 
     private void Update()
@@ -66,7 +76,26 @@ public class GameManager : MonoBehaviour
             {
                 LobbyManager.RemovePlayer(player);
             }
-        }   
+        }
+        else
+        {
+            foreach (var item in Server.Players)
+            {
+                var a = _playerAchievements[item];
+
+                if (a.IsAchieved())
+                {
+                    var cmd = new Command(item, "MISSION", a.Name + "\n" + a.Description + ";SUCC");
+                    Server.SendPlayerMessage(item, cmd);
+
+                    a = AchievementManager.Instance.GetNextAchievement(item.Id);
+                    _playerAchievements[item] = a;
+
+                    cmd = new Command(item, "MISSION", a.Name + "\n" + a.Description);
+                    Server.SendPlayerMessage(item, cmd);
+                }
+            }
+        }
     }
 
     private void UpdateUi()

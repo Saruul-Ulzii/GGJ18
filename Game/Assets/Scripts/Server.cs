@@ -3,6 +3,7 @@ using System.Linq;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 using UnityEngine;
+using System;
 
 public class Server : WebSocketBehavior
 {
@@ -12,9 +13,12 @@ public class Server : WebSocketBehavior
 
     public static Queue<Command> Commands = new Queue<Command>();
     public static List<Player> Players = new List<Player>();
+    private static List<Player> DisconnectedPlayers = new List<Player>();
 
     public static string ServerUrl;
     public static int CommandCount;
+
+    public static bool IsInGame;
 
     public static void Start(bool isLocal = false) {
 
@@ -77,6 +81,19 @@ public class Server : WebSocketBehavior
 
         switch (command.CommandName)
         {
+            case "id":
+                Debug.Log("Get ID Command: " + command.Player.Id + ", " + command.Data);
+                var id = Convert.ToInt32(command.Data);
+                var dplayer = DisconnectedPlayers.FirstOrDefault(p => p.Id == id);
+                if(dplayer != null)
+                {
+                    Debug.Log("Found disconnectedPlayer!");
+                    DisconnectedPlayers.Remove(dplayer);
+                    _player.Id = dplayer.Id;
+                    _player.Name = dplayer.Name;
+                    _player.CommandCount = dplayer.CommandCount;
+                }
+                break;
             case "name":
                 var name = command.Data;
                 _player.Name = name;
@@ -101,20 +118,34 @@ public class Server : WebSocketBehavior
     protected override void OnClose(CloseEventArgs e)
     {
         Debug.Log("Player disconnected from Websocket: " + _player.Id);
-        Players.Remove(_player);        
-        _player = null;
+        Players.Remove(_player);
+        if (IsInGame)
+        {
+            DisconnectedPlayers.Add(_player);
+        }
+        else
+        {
+            _player = null;
+        }
     }
 
     public static void StartGame()
     {
+        IsInGame = true;
         foreach (var player in Players)
         {
             player.Server.Send("START;");
         }
     }
 
+    public static void SendPlayerMessage(Player player, Command command)
+    {
+        player.Server.Send(command.CommandName + ";" + command.Data);
+    }
+
     public static void EndGame()
     {
+        IsInGame = false;
         foreach (var player in Players)
         {
             player.Server.Send("END;");

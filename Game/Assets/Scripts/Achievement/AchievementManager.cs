@@ -8,8 +8,8 @@ public class AchievementManager : MonoBehaviour
 
     private Dictionary<StringPlayerId, float> _dataValues = new Dictionary<StringPlayerId, float>();
 
-    private void Awake()
-    {
+    private void Start()
+    {        
         Instance = this;    
     }
 
@@ -66,6 +66,7 @@ public class AchievementManager : MonoBehaviour
         if (Achievements.Count == 0) return null;
 
         var index = Random.Range(0, Achievements.Count);
+        Debug.Log("Next Achievment: " + index+" from "+Achievements.Count);
         return Achievements[index].Clone(playerId);
     }
 

@@ -78,6 +78,10 @@
   {
 	  $("#output").empty();
   }
+  
+  function SendMsg(){	
+	 doSend($("#msg").val());
+  }
 
   window.addEventListener("load", init, false);
 
@@ -88,6 +92,8 @@
   <input type="text" id="name" /> <input type="button" onClick="ChangeName()" value="Change Name" />
   <br />
   <input type="button" value="PRESS" onClick="Press()" /><input type="button" value="RELEASE" onClick="Release()" />
+  <br />
+  <input type="text" id="msg" /> <input type="button" onClick="SendMsg()" value="Send" />
   <br />
   <br />  
   <input type="button" onClick="Clear()" value="Clear Output" />
