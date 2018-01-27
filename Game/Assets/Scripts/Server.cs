@@ -82,9 +82,17 @@ public class Server : WebSocketBehavior
 
     public static void StartGame()
     {
-        foreach(var player in Players)
+        foreach (var player in Players)
         {
             player.Server.Send("START;");
+        }
+    }
+
+    public static void EndGame()
+    {
+        foreach (var player in Players)
+        {
+            player.Server.Send("END;");
         }
     }
 }
