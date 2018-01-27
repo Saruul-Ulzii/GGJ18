@@ -12,7 +12,7 @@ public class AddressQrReader : MonoBehaviour {
 	private Rect screenRect;
 
 	public VerticalWebSocket Ws;
-	public GameObject Next;
+	//public GameObject Next;
     public Image webcamDisplay;
 
     private Int32 counter;
@@ -26,6 +26,10 @@ public class AddressQrReader : MonoBehaviour {
 		camTexture.requestedWidth = Screen.width;
         counter = 0;
 
+#if UNITY_ANDROID
+        webcamDisplay.rectTransform.Rotate(new Vector3(0, 0, -90));
+#endif
+
         if (camTexture != null) 
 		{
             coroutine_LowerFramerateForSeconds(1);
@@ -35,7 +39,7 @@ public class AddressQrReader : MonoBehaviour {
 
 	void OnGUI () {
 		// drawing the camera on screen
-		GUI.DrawTexture (screenRect, camTexture, ScaleMode.ScaleToFit);
+		//GUI.DrawTexture (screenRect, camTexture, ScaleMode.ScaleToFit);
         counter += 1;
         // do the reading — you might want to attempt to read less often than you draw on the screen for performance sake
         if (counter % 10 == 0)
@@ -48,7 +52,7 @@ public class AddressQrReader : MonoBehaviour {
                 camTexture.width, camTexture.height);
                 if (result != null)
                 {
-                    Next.SetActive(true);
+                    //Next.SetActive(true);
                     gameObject.SetActive(false);
                     Ws.connect(result.Text);
                 }
