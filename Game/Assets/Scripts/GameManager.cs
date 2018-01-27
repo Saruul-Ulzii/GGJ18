@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        Server.EndGame();
+    {        
         StartLobby();
     }
 
