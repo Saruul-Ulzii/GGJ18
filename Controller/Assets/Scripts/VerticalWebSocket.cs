@@ -83,7 +83,8 @@ public class VerticalWebSocket : WSClientBehaviour
             case "start":
                 HandleStartCommand();
                 break;
-            case "stop":
+            case "end":
+                base.CloseConnection();
                 SceneManager.LoadScene("qr-reader");
                 break;
             default: 

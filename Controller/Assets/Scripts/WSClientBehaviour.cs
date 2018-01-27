@@ -73,4 +73,9 @@ public class WSClientBehaviour : MonoBehaviour {
         }
         webSocket.Send(message.serialize());
     }
+
+    protected void CloseConnection()
+    {
+        webSocket.Close();
+    }
 }
