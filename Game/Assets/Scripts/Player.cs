@@ -24,7 +24,7 @@ public class Player
         {
             if (name == "")
             {
-                var nameID = Id % PlayerValues.Instance.colors.Count;
+                var nameID = Id % PlayerValues.Instance.testNames.Count;
                 return PlayerValues.Instance.testNames[nameID];
             }
             

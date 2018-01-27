@@ -5,7 +5,7 @@ public class VerticalWebSocket : WSClientBehaviour
 {
     public WebsocketState State {get;private set;}    
 
-    public Nullable<int> PlayerId {get; private set;}
+    public static Nullable<int> PlayerId {get; private set;}
     public string PlayerName {get; private set;}
     public GameObject Button1;
     public GameObject WaitingScreen;
