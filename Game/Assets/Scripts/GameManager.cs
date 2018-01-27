@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static int MinPlayer = 3;
+    public static GameManager Instance { get; private set; }
+
+    public int MinPlayer = 3;
+    public float ResetStateTime = 3;
 
     public GameStates GameState;
     public LobbyManager LobbyManager;
-
-    public GameObject StartUiRoot;
+    
     public GameObject LobbyUiRoot;
 
     public bool HostWebsocketLocal;
@@ -18,13 +20,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        GameState = GameStates.None;
-        UpdateUi();
+        StartLobby();
     }
 
     public void StartLobby()
@@ -69,7 +71,6 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUi()
     {
-        StartUiRoot.SetActive(GameState == GameStates.None);
         LobbyUiRoot.SetActive(GameState == GameStates.Lobby);
     }
 }

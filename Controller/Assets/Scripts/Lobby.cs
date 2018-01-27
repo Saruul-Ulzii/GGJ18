@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class Lobby : MonoBehaviour
 {
     public InputField inputField;
+    public GameObject joinBtn;
+    public GameObject waitingScreen;
     public VerticalWebSocket ws;
     public Text IPText;
 
@@ -21,7 +23,12 @@ public class Lobby : MonoBehaviour
             return;
         }
 
-        inputField.gameObject.SetActive(false);
-        ws.SendName(inputField.text);
+        bool sent = ws.SendName(inputField.text);
+        if (sent)
+        {
+            inputField.gameObject.SetActive(false);
+            joinBtn.SetActive(false);
+            waitingScreen.SetActive(true);
+        }
     }
 }

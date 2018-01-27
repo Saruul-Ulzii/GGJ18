@@ -5,17 +5,13 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-
-    public Color PlayerColor;
-
     public string MissionText;
-
     public string PlayerIndicator;
 
-	public Text MissionTextComponent;
-	public Text PlayerIndicatorComponent;
-	public Button EngineButton;
-	public Image ButtonCenterImage;
+    public Text MissionTextComponent;
+    public Text PlayerIndicatorComponent;
+    public Button EngineButton;
+    public Image ButtonCenterImage;
 
     public bool CallSuccess = true;
     public bool CallFail = true;
@@ -30,31 +26,36 @@ public class UIController : MonoBehaviour
     private Vector3 NotificationStartPos;
 
     // Use this for initialization
-    void Start ()
-	{
-	    MissionTextComponent.text = MissionText;
-	    PlayerIndicatorComponent.text = PlayerIndicator;
+    void Start()
+    {
+        MissionTextComponent.text = MissionText;
+        PlayerIndicatorComponent.text = PlayerIndicator;
+        UpdateColor();
+        NotificationStartPos = SuccesNotification.transform.position;
+    }
 
-	    var colors = EngineButton.colors;
-	    colors.pressedColor = PlayerColor;
-	    EngineButton.colors = colors;
+    // Update is called once per frame
+    void Update()
+    {
+        if (CallSuccess)
+        {
+            TriggerNotification(SuccesNotification);
+        }
+        if (CallFail)
+        {
+            TriggerNotification(FailNotification);
+        }
 
-	    ButtonCenterImage.color = PlayerColor;
+        UpdateColor();
+    }
 
-	    NotificationStartPos = SuccesNotification.transform.position;
+    private void UpdateColor()
+    {
+        var colors = EngineButton.colors;
+        colors.pressedColor = PlayerValues.Color;
+        EngineButton.colors = colors;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    if (CallSuccess)
-	    {
-	        TriggerNotification(SuccesNotification);
-	    }
-	    if (CallFail)
-	    {
-	        TriggerNotification(FailNotification);
-	    }
+        ButtonCenterImage.color = PlayerValues.Color;
     }
 
     private void TriggerNotification(GameObject notification)
@@ -62,7 +63,7 @@ public class UIController : MonoBehaviour
         notification.SetActive(true);
         // animate the position of the game object...
         Vector3 pos = NotificationStartPos;
-        pos.y = Mathf.Lerp(pos.y + 100, pos.y , t);
+        pos.y = Mathf.Lerp(pos.y + 100, pos.y, t);
         notification.transform.position = pos;
 
         // .. and increate the t interpolater
@@ -74,7 +75,6 @@ public class UIController : MonoBehaviour
             CallSuccess = false;
             CallFail = false;
             StartCoroutine(DeactivateNotifications(notification));
-            
         }
     }
 
