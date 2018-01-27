@@ -964,6 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button1: {fileID: 445396881}
+  WaitingScreen: {fileID: 1071052063}
 --- !u!4 &795937770
 Transform:
   m_ObjectHideFlags: 0
@@ -1141,7 +1142,7 @@ GameObject:
   - component: {fileID: 1071052066}
   - component: {fileID: 1071052065}
   m_Layer: 5
-  m_Name: Text
+  m_Name: WaitingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
