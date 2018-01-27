@@ -31,7 +31,8 @@ public class SpaceShipController : MonoBehaviour {
     void Start()
     {
         _EngineControllers = new List<TriebwerkController>();
-        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(_PlayerCount, Server.Players.Count), _EngineControllers);
+        var playerCount = Server.Players.Count > 2 ? Server.Players.Count : _PlayerCount;
+        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(3, playerCount), _EngineControllers);
     }
 
     void Update()
@@ -149,5 +150,13 @@ public class SpaceShipController : MonoBehaviour {
         int engineId = playerID % _EngineControllers.Count;
         _EngineControllers[engineId].On = pressed;
         _EngineControllers[engineId].Intensity = 0.5f;
+    }
+
+    public void CloseHit()
+    {
+        AchievementManager achvManager = AchievementManager.GetComponent<AchievementManager>();
+        float closeHits = achvManager.GetData("CLOSEHITS");
+        closeHits += 1;
+        achvManager.SetData("CLOSEHITS", closeHits);
     }
 }
