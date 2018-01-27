@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WebSocketTest : WSClientBehaviour {
+public class WebSocketTest : WSClientBehaviour
+{
+    public static string URL = "ws://172.18.11.70:5001/Server";
 
-	// Use this for initialization
-	void Start () {
-        string url = "ws://172.18.11.187:5001/Server";
-        connect( url );
-        
-	}
+    void Start()
+    {
+        string url = URL;
+        connect(url);
+    }
+
     public override void handleCommand(Command c)
     {
         base.handleCommand(c);
@@ -21,7 +21,7 @@ public class WebSocketTest : WSClientBehaviour {
     public override void onConnectionReady(object sender, EventArgs e)
     {
         base.onConnectionReady(sender, e);
-        
+
     }
 
     public void sendTestCommand()
