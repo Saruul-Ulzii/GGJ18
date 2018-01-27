@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Server : WebSocketBehavior
     public static List<Player> Players = new List<Player>();
 
     public static string ServerUrl;
+    public static int CommandCount;
 
     public static void Start(bool isLocal = false) {
 
@@ -33,11 +35,12 @@ public class Server : WebSocketBehavior
     {
         _player = new Player
         {
-            Id = _playerIds++,
+            Id = GetNextValidId(),
             Server = this
         };
         Players.Add(_player);
         Debug.Log("Registerd player with ID: " + _player.Id);
+        CommandCount = 0;
     }
 
     ~Server()
@@ -68,6 +71,8 @@ public class Server : WebSocketBehavior
             CommandName = data[0].ToLower(),
             Data = data[1]
         };
+        CommandCount++;
+        _player.CommandCount++;
 
         switch (command.CommandName)
         {
@@ -79,6 +84,7 @@ public class Server : WebSocketBehavior
                 break;
             case "button1":
                 Debug.Log(string.Format("Player {0} {1} button 1", command.Player.Id, command.Data.ToLower()));
+                _player.ButtonState = command.Data.ToLower() == "pressed" ? true : (command.Data.ToLower() == "released" ? (bool?)false : null);
                 Commands.Enqueue(command);
                 break;
             case "button2":
@@ -112,5 +118,15 @@ public class Server : WebSocketBehavior
         {
             player.Server.Send("END;");
         }
+    }
+
+    private int GetNextValidId()
+    {
+        if (Players.Count == 0) return 0;
+        for (int i = 0; i < Players.Count; i++)
+        {
+            if (!Players.Any(p => p.Id == i)) return i;
+        }
+        return Players.Count;
     }
 }

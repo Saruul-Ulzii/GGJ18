@@ -8,6 +8,9 @@ public class Player
 
     private string name;
 
+    public bool? ButtonState;
+    public int CommandCount;
+
     public Color Color
     {
         get
