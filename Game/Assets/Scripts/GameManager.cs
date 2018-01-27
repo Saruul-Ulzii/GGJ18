@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public GameStates GameState;
     public LobbyManager LobbyManager;
 
-
-
     public GameObject StartUiRoot;
     public GameObject LobbyUiRoot;
 
