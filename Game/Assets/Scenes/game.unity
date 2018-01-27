@@ -376,6 +376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9702a72fd0a45747bbde3916b9f0f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ExplosionPrefab: {fileID: 1967879056874662, guid: 4fc9c6a4b6b880d498611c3e02d5fbf3,
+    type: 2}
   _AsteroidPrefab: {fileID: 1402934230648244, guid: 2e0bf79293b418947885c5c7531a495c,
     type: 2}
   _SpaceShipTr: {fileID: 587238333}

@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b8bd5b9ebc6974095e9d8495dc30d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionPrefab: {fileID: 0}
+  ExplosionPrefab: {fileID: 1967879056874662, guid: 4fc9c6a4b6b880d498611c3e02d5fbf3,
+    type: 2}
 --- !u!135 &135452155751256922
 SphereCollider:
   m_ObjectHideFlags: 1

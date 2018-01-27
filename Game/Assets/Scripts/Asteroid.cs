@@ -2,9 +2,6 @@
 
 public class Asteroid : MonoBehaviour
 {
-    [SerializeField]
-    GameObject ExplosionPrefab;
-
     AsteroidSpawner _Spawner;
     Transform _SpaceshipTransform;
     float _DestructionDist;
@@ -33,7 +30,7 @@ public class Asteroid : MonoBehaviour
     {
         if (_SpaceshipTransform == null)
         {
-            _Spawner.Return(gameObject);
+            _Spawner.ReturnAsteroid(gameObject);
         }
         var dist = Vector3.Distance(_Transform.position, _SpaceshipTransform.position);
         if (dist > _DestructionDist)
@@ -47,14 +44,11 @@ public class Asteroid : MonoBehaviour
         Destroy();
     }
 
-    void Destroy() {
-        if (ExplosionPrefab != null)
-        {
-            var explosion = Instantiate(ExplosionPrefab);
-            explosion.transform.position = _Transform.position;
-        }
+    void Destroy()
+    {
+        _Spawner.SpawnExplosion(_Transform.position);
 
         if (gameObject.activeSelf)
-            _Spawner.Return(gameObject);
+            _Spawner.ReturnAsteroid(gameObject);
     }
 }

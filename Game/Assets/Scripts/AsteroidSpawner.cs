@@ -6,6 +6,8 @@ using UnityEngine;
 public class AsteroidSpawner : MonoBehaviour {
 
     [SerializeField]
+    GameObject _ExplosionPrefab;
+    [SerializeField]
     GameObject _AsteroidPrefab;
 
     [SerializeField]
@@ -21,6 +23,7 @@ public class AsteroidSpawner : MonoBehaviour {
 
     Transform _SpawnerTransform;
     Queue<GameObject> PooledAsteroids = new Queue<GameObject>();
+    Queue<GameObject> PooledExplosions = new Queue<GameObject>();
 
     // Use this for initialization
     void Start () {
@@ -49,10 +52,33 @@ public class AsteroidSpawner : MonoBehaviour {
         }
     }
 
-    internal void Return(GameObject go)
+    internal void SpawnExplosion(Vector3 position)
+    {
+        GameObject explosionGo = null;
+        if (PooledExplosions.Count > 0)
+        {
+            explosionGo = PooledExplosions.Dequeue();
+            explosionGo.SetActive(true);
+        }
+        else
+        {
+            explosionGo = Instantiate(_ExplosionPrefab);
+            explosionGo.GetComponent<ReturnExplosion>().Spawner = this;
+        }
+
+        explosionGo.transform.position = position;
+    }
+
+    internal void ReturnAsteroid(GameObject go)
     {
         go.SetActive(false);
         PooledAsteroids.Enqueue(go);
+    }
+
+    internal void ReturnExplosion(GameObject go)
+    {
+        go.SetActive(false);
+        PooledExplosions.Enqueue(go);
     }
 
     // Update is called once per frame
