@@ -45,7 +45,7 @@ public class SpaceshipGenerator : MonoBehaviour
             var engine = Instantiate(_EnginePrefab);
             var engineTr = engine.transform;
             engineTr.SetParent(transform);
-            engineTr.localPosition = verts[i] + new Vector3(0,-0.15f,0);
+            engineTr.localPosition = verts[i] + new Vector3(0,-0.35f,0);
             playerInputs[i] = new PlayerInputRestrictions(currentAngle);
             engineTr.localRotation = Quaternion.Euler(0, currentAngle, 0);
 
