@@ -70,6 +70,7 @@ public class AddressQrReader : MonoBehaviour {
 
         Texture2D tex = new Texture2D(camTexture.width, camTexture.height);
         tex.SetPixels32(camTexture.GetPixels32());
+        tex.Apply();
 
         var sprite = Sprite.Create(tex, new Rect(0, 0, camTexture.width, camTexture.height), Vector2.zero);
         webcamDisplay.sprite = sprite;
