@@ -32,6 +32,7 @@ public class VerticalWebSocket : WSClientBehaviour
                 var cmd = new Command("ID", PlayerId.ToString());
                 sendCommand(cmd);
                 State = WebsocketState.GameStarted;
+                return;
             }
             catch (System.Exception ex)
             {
