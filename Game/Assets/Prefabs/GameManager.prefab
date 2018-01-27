@@ -71,3 +71,4 @@ MonoBehaviour:
     type: 2}
   PlayerEntryListTransform: {fileID: 0}
   LobbyPlayer: []
+  StartButton: {fileID: 0}
