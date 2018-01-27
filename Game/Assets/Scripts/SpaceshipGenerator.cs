@@ -34,7 +34,7 @@ public class SpaceshipGenerator : MonoBehaviour
     float rotationSpeed = 60.0f;
 
     int _TestPlayerControls;
-    private List<TriebwerkController> engineControllers = new List<TriebwerkController>(); 
+    private List<TriebwerkController> engineControllers = new List<TriebwerkController>();
 
     void Start () {
         GenerateSpaceship();
@@ -59,11 +59,14 @@ public class SpaceshipGenerator : MonoBehaviour
             var orig = tr.position - direction;
             Debug.DrawLine(orig, orig + 3*direction, Color.red);
             _Rigidbody.AddForceAtPosition(0.1f* direction, orig, ForceMode.Impulse);
-            engineControllers[_TestPlayerControls].Intensity = Mathf.Lerp(0, 1f, 0.5f * Time.deltaTime);
+
+            engineControllers[_TestPlayerControls].On = true;
+            engineControllers[_TestPlayerControls].Intensity = 0.5f;
         }
         else
         {
-            engineControllers[_TestPlayerControls].Intensity = 0; 
+
+            engineControllers[_TestPlayerControls].On = false;
         }
         var hor = Input.GetAxis("Horizontal");
         if (hor< -float.Epsilon || hor > float.Epsilon)
