@@ -215,11 +215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b39f8048c0e0094fb8aff8247a2058e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PlayerCount: 0
-  _SpaceShipGenerator: 0
+  _SpaceShipGenerator: {fileID: 114866925668062144}
+  _PlayerCount: 3
   _DegreesOfFreedom: 45
   _RotationSpeed: 60
-  _Rigidbody: {fileID: 0}
+  _Rigidbody: {fileID: 54169504072576226}
 --- !u!114 &114866925668062144
 MonoBehaviour:
   m_ObjectHideFlags: 1
