@@ -8,7 +8,7 @@ using WebSocketSharp;
 public class WSClientBehaviour : MonoBehaviour {
 
     private WebSocket webSocket;
-    private Queue<Command> commandQueue;
+    protected Queue<Command> commandQueue;
     bool webServerReady = false;
 
     public WSClientBehaviour()
@@ -19,15 +19,6 @@ public class WSClientBehaviour : MonoBehaviour {
 	void Start () {
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        while(commandQueue.Count > 0)
-        {
-            var c = commandQueue.Dequeue();
-            handleCommand(c);
-        }
-	}
-
     public virtual void handleCommand( Command c)
     {
 
@@ -59,11 +50,14 @@ public class WSClientBehaviour : MonoBehaviour {
 
     private void handleMessage(object sender, MessageEventArgs e)
     {
+        Debug.Log(e.Data);
+
         string message = e.Data;
         try
         {
             Command deserialized = Command.deserialize(message);
             commandQueue.Enqueue(deserialized);
+            Debug.Log(commandQueue.Count);
         } catch ( ArgumentException ex)
         {
             Debug.Log("Error: " + ex);

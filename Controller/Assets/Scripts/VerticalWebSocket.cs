@@ -42,10 +42,17 @@ public class VerticalWebSocket : WSClientBehaviour
         State = WebsocketState.Failed;
     }
 
-    public void Update()
+    void Update()
     {
         if(State == WebsocketState.Disconnected)
             Reconnect();
+
+        while (commandQueue.Count > 0)
+        {
+            var c = commandQueue.Dequeue();
+            Debug.Log("Dequeue: " + c.Name + " content: " + c.Content);
+            handleCommand(c);
+        }
     }
 
     public override void connect(string url)
