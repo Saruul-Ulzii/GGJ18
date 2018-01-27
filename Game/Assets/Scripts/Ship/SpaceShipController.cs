@@ -30,7 +30,7 @@ public class SpaceShipController : MonoBehaviour {
     void Start()
     {
         _EngineControllers = new List<TriebwerkController>();
-        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(3, Server.Players.Count), _EngineControllers);
+        _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(_PlayerCount, Server.Players.Count), _EngineControllers);
     }
 
     void Update()
