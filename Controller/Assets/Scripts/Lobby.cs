@@ -6,6 +6,10 @@ public class Lobby : MonoBehaviour
     public InputField inputField;
     public VerticalWebSocket ws;
 
+    private void Start()
+    {
+        ws.connect(WebSocketTest.URL);
+    }
 
     public void SendName()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WebSocketTest : WSClientBehaviour
 {
-    public static string URL = "ws://172.18.11.70:5001/Server";
+    public static string URL = "ws://localhost:5001/Server";
 
     void Start()
     {
