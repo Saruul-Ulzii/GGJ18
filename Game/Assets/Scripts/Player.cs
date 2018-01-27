@@ -11,8 +11,8 @@ public class Player
     {
         get
         {
-            var num = PlayerColor.Instance.colors.Count - 1;
-            var color = PlayerColor.Instance.colors[Id % num];
+            var colorID = Id % PlayerColor.Instance.colors.Count;
+            var color = PlayerColor.Instance.colors[colorID];
             return color;
         }
     }
@@ -29,5 +29,17 @@ public class Player
         if (ReferenceEquals(p1, p2)) return false;
         if (p1 == null || p2 == null) return true;
         return p1.Id != p2.Id;
+    }
+
+    public override bool Equals(object obj)
+    {
+        var player = obj as Player;
+        if (player == null) return false;
+        return this == player;
+    }
+
+    public override int GetHashCode()
+    {
+        return Id;
     }
 }

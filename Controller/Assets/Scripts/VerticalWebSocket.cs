@@ -9,6 +9,7 @@ public class VerticalWebSocket : WSClientBehaviour
 
     public Nullable<int> PlayerId {get; private set;}
     public string PlayerName {get; private set;}
+    public GameObject Button1;
 
 	// Use this for initialization
     void Start () {
@@ -44,6 +45,7 @@ public class VerticalWebSocket : WSClientBehaviour
         }
         State = WebsocketState.Initialized;
         PlayerId = int.Parse(arg);
+        Button1.SetActive(true);
     }
 
     public override void onConnectionReady(object sender, EventArgs e)
@@ -55,6 +57,12 @@ public class VerticalWebSocket : WSClientBehaviour
     {
         Command cmd = new Command("NAME", playerName);
         PlayerName = playerName;
+        sendCommand(cmd);
+    }
+
+    public void SendButton1Event(string state)
+    {
+        var cmd = new Command("BUTTON1", state);
         sendCommand(cmd);
     }
 }

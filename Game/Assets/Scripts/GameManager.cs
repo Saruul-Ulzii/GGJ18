@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static int MinPlayer = 2;
+
     public GameStates GameState;
     public LobbyManager LobbyManager;
 
     public GameObject StartUiRoot;
     public GameObject LobbyUiRoot;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
@@ -20,6 +27,13 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameStates.Lobby;
         Server.Start();
+        UpdateUi();
+    }
+
+    public void StartGame()
+    {
+        GameState = GameStates.Game;
+        Server.StartGame();
         UpdateUi();
     }
 
