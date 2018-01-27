@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Achievement
 {
-    public int Id;
     public string Name;
     public string Description;
     public float Time;
@@ -18,9 +17,22 @@ public class Achievement
         return false;
     }
 
-    public Achievement Clone()
+    public Achievement Clone(int playerId)
     {
-        return new Achievement();
+        return new Achievement
+        {
+            Name = Name,
+            Description = Description,
+            Time = Time,
+            Points = Points,
+            Goals = Goals.Select(g => new AchievementGoal()
+            {
+                Id = g.Id,
+                Goal = g.Goal,
+                IsPlayerGoal = g.IsPlayerGoal,
+                PlayerId = g.PlayerId
+            }).ToList()
+        };
     }
 }
 
