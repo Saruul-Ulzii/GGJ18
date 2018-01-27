@@ -30,7 +30,7 @@ public class WSClientBehaviour : MonoBehaviour {
         Debug.Log("Captn, connection is vertial!");
     }
 
-    public virtual void OnConnectionClose(object sender, EventArgs e)
+    public virtual void OnConnectionClose()
     {
         webServerReady = false; 
         Debug.Log("oh boi. dat connection is det");
@@ -43,7 +43,8 @@ public class WSClientBehaviour : MonoBehaviour {
         webSocket = new WebSocket(url);
         webSocket.OnMessage += handleMessage;
         webSocket.OnOpen += onConnectionReady;
-        webSocket.OnClose += OnConnectionClose;
+        webSocket.OnClose += (s,e) => OnConnectionClose();
+        webSocket.OnError += (s,e) => OnConnectionClose();
         
         webSocket.Connect();
     }
