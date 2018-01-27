@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Lobby : MonoBehaviour
@@ -11,6 +12,12 @@ public class Lobby : MonoBehaviour
 
     private void Start()
     {
+        if(ws.State == WebsocketState.UnInitialized)
+        {
+            SceneManager.LoadScene("qr-reader");
+            return;
+        }
+
         IPText.text = "IP: " +  WebSocketTest.URL;
         ws.connect(WebSocketTest.URL);
     }
