@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpaceShipController : MonoBehaviour {
@@ -71,6 +72,7 @@ public class SpaceShipController : MonoBehaviour {
         switch (command.CommandName)
         {
             case "button1":
+                command.Player.StateUpdateTime = GameManager.Instance.ResetStateTime;
                 var data = command.Data.ToLower();
                 if (data == "pressed") _engineState[command.Player] = true;
                 if (data == "released") _engineState[command.Player] = false;                
@@ -79,6 +81,34 @@ public class SpaceShipController : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void ResetState(Player player)
+    {
+        if (!_engineState.ContainsKey(player))
+        {
+            _engineState.Add(player, false);
+        }
+        else
+        {
+            _engineState[player] = false;
+        }
+    }
+
+    public void RemoveMissingPlayers(List<Player> player)
+    {
+        var missing = new List<Player>();
+        foreach (var kv in _engineState)
+        {
+            if(!player.Any(p => p == kv.Key))
+            {
+                missing.Add(kv.Key);
+            }
+        }
+        foreach (var person in missing)
+        {
+            _engineState.Remove(person);
         }
     }
 

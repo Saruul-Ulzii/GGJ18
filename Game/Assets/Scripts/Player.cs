@@ -11,6 +11,8 @@ public class Player
     public bool? ButtonState;
     public int CommandCount;
 
+    public float StateUpdateTime;
+
     public Color Color
     {
         get
