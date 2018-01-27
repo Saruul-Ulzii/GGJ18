@@ -30,10 +30,12 @@ public class SpaceshipGenerator : MonoBehaviour
     GameObject _EnginePrefab;
 
     [SerializeField]
-    float degreesOfFreedom = 45.0f;
-    float rotationSpeed = 60.0f;
+    float _DegreesOfFreedom = 45.0f;
+    [SerializeField]
+    float _RotationSpeed = 60.0f;
 
-    int _TestPlayerControls;
+    int _TestPlayerControls=1;
+
     private List<TriebwerkController> engineControllers = new List<TriebwerkController>();
 
     void Start () {
@@ -60,13 +62,13 @@ public class SpaceshipGenerator : MonoBehaviour
             Debug.DrawLine(orig, orig + 3*direction, Color.red);
             _Rigidbody.AddForceAtPosition(0.1f* direction, orig, ForceMode.Impulse);
 
-            engineControllers[_TestPlayerControls].On = true;
-            engineControllers[_TestPlayerControls].Intensity = 0.5f;
+            engineControllers[_TestPlayerControls-1].On = true;
+            engineControllers[_TestPlayerControls-1].Intensity = 0.5f;
         }
         else
         {
 
-            engineControllers[_TestPlayerControls].On = false;
+            engineControllers[_TestPlayerControls-1].On = false;
         }
         var hor = Input.GetAxis("Horizontal");
         if (hor< -float.Epsilon || hor > float.Epsilon)
@@ -74,7 +76,7 @@ public class SpaceshipGenerator : MonoBehaviour
             var tr = transform.GetChild(_TestPlayerControls);
             var input = _PlayerInputs[_TestPlayerControls-1];
             var origAng = input.originalAngle;
-            input.currentAngle = Mathf.Clamp(input.currentAngle + (hor* rotationSpeed * Time.deltaTime), origAng - degreesOfFreedom, origAng + degreesOfFreedom);
+            input.currentAngle = Mathf.Clamp(input.currentAngle + (hor* _RotationSpeed * Time.deltaTime), origAng - _DegreesOfFreedom, origAng + _DegreesOfFreedom);
             tr.localRotation = Quaternion.Euler(0, input.currentAngle, 0);
         }
     }

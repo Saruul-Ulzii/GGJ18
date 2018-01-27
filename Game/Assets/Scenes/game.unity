@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.4964127, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &587238333 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4876805304542804, guid: 49475a39474598043a9970117728cdc8,
+    type: 2}
+  m_PrefabInternal: {fileID: 2063303144}
 --- !u!1 &873171803
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +194,7 @@ GameObject:
   - component: {fileID: 1025105881}
   - component: {fileID: 1025105880}
   - component: {fileID: 1025105879}
+  - component: {fileID: 1025105883}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -259,6 +265,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1025105883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1025105878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c5af8399e3f1e47abea6b08a058473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Target: {fileID: 587238333}
 --- !u!1 &1486508507
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +318,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2052039955
+--- !u!1001 &2063303144
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -338,17 +356,6 @@ Prefab:
     - target: {fileID: 4876805304542804, guid: 49475a39474598043a9970117728cdc8, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114866925668062144, guid: 49475a39474598043a9970117728cdc8,
-        type: 2}
-      propertyPath: _EnginePrefab
-      value: 
-      objectReference: {fileID: 1622085600549116, guid: 7a195abe5cbc2044381ebcd305afc4a8,
-        type: 2}
-    - target: {fileID: 114866925668062144, guid: 49475a39474598043a9970117728cdc8,
-        type: 2}
-      propertyPath: _PlayerCount
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49475a39474598043a9970117728cdc8, type: 2}
