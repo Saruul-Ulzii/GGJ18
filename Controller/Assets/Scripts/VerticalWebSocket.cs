@@ -64,6 +64,8 @@ public class VerticalWebSocket : WSClientBehaviour
 
     public override void handleCommand(Command c)
     {
+        Debug.Log("Handle command: " + c.Name);
+
         base.handleCommand(c);
         
         switch(c.Name.ToLower())
