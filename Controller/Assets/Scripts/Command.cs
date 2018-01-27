@@ -23,7 +23,7 @@ public class Command {
     public static Command deserialize( string message)
     {
         string[] splitted = message.Split(';');
-        if ( splitted.Length != 2)
+        if ( splitted.Length < 2)
         {
             throw new ArgumentException("Can't parse message: " + message );
         }
