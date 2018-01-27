@@ -8,6 +8,7 @@ public class VerticalWebSocket : WSClientBehaviour
     public Nullable<int> PlayerId {get; private set;}
     public string PlayerName {get; private set;}
     public GameObject Button1;
+    public GameObject WaitingScreen;
 
     private GameObject _currentInput;
 
@@ -60,6 +61,7 @@ public class VerticalWebSocket : WSClientBehaviour
         State = WebsocketState.GameStarted;
         _currentInput = Button1;
         _currentInput.SetActive(true);
+        WaitingScreen.SetActive(false);
     }
 
     public override void onConnectionReady(object sender, EventArgs e)
