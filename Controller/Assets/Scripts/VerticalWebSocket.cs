@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class VerticalWebSocket : WSClientBehaviour
 {
@@ -72,6 +73,9 @@ public class VerticalWebSocket : WSClientBehaviour
                 break;
             case "start":
                 HandleStartCommand();
+                break;
+            case "stop":
+                SceneManager.LoadScene("qr-reader");
                 break;
             default: 
                 Debug.Log("unknown command!");

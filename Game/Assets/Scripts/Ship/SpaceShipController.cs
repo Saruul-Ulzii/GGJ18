@@ -153,4 +153,12 @@ public class SpaceShipController : MonoBehaviour {
         _EngineControllers[engineId].On = pressed;
         _EngineControllers[engineId].Intensity = 0.5f;
     }
+
+    public void CloseHit()
+    {
+        AchievementManager achvManager = AchievementManager.GetComponent<AchievementManager>();
+        float closeHits = achvManager.GetData("CLOSEHITS");
+        closeHits += 1;
+        achvManager.SetData("CLOSEHITS", closeHits);
+    }
 }
