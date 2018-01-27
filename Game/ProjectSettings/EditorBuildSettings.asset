@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/game.unity
     guid: e80d5b211da3a14459450c7cef718619
+  - enabled: 1
+    path: Assets/Scenes/LoosingScreen.unity
+    guid: e005d7d804dd5a24e9d35179796e72b1
