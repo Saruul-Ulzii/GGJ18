@@ -4,13 +4,80 @@ using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
-    public List<Achievement> Achievements;
+    public static AchievementManager Instance;
 
-    public Achievement GetNextAchievement()
+    private Dictionary<StringPlayerId, float> _dataValues = new Dictionary<StringPlayerId, float>();
+
+    private void Awake()
     {
-        if (Achievements.Count == 0) return null;
+        Instance = this;    
+    }
 
-        var index = Random.Range(0, Achievements.Count);
-        return Achievements[index];
-    } 
+    public void SetData(string id, float value)
+    {
+        var key = new StringPlayerId(null, id);
+        if (!_dataValues.ContainsKey(key))
+        {
+            _dataValues.Add(key, value);
+        }
+        else
+        {
+            _dataValues[key] = value;
+        }
+    }
+
+    public void SetPlayerData(int playerId, string id, float value)
+    {
+        var key = new StringPlayerId(playerId, id);
+        if (!_dataValues.ContainsKey(key))
+        {
+            _dataValues.Add(key, value);
+        }
+        else
+        {
+            _dataValues[key] = value;
+        }
+    }
+
+    public float GetData(string id)
+    {
+        var key = new StringPlayerId(null, id);
+        if (_dataValues.ContainsKey(key))
+        {
+            return _dataValues[key];
+        }
+        return 0;
+    }
+
+    public float GetPlayerData(int playerId, string id)
+    {
+        var key = new StringPlayerId(playerId, id);
+        if (_dataValues.ContainsKey(key))
+        {
+            return _dataValues[key];
+        }
+        return 0;
+    }
+
+    //public List<Achievement> Achievements;
+
+    //public Achievement GetNextAchievement()
+    //{
+    //    if (Achievements.Count == 0) return null;
+
+    //    var index = Random.Range(0, Achievements.Count);
+    //    return Achievements[index];
+    //} 
+
+    public struct StringPlayerId
+    {
+        public int? PlayerId;
+        public string Id;
+
+        public StringPlayerId(int? playerId, string id)
+        {
+            PlayerId = playerId;
+            Id = id;
+        }
+    }
 }
