@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerShipLife : MonoBehaviour
 {
+    float damageFactor = 5.0f;
+
     [SerializeField]
     float MaxLife = 100;
 
@@ -21,8 +23,8 @@ public class PlayerShipLife : MonoBehaviour
     }
 
     // Use this for initialization
-    void OnCollisionEnter () {
-        CurrentLife -= 10;
+    void OnCollisionEnter (Collision collision) {
+        CurrentLife -= damageFactor*collision.relativeVelocity.magnitude;
 
         if (CurrentLife < 0)
         {
