@@ -12,12 +12,13 @@ public class AsteroidSpawner : MonoBehaviour {
 
     [SerializeField]
     Transform _SpaceShipTr;
+    Rigidbody _SpaceshipRigid;
 
     float _InitialAsteroidSpawnsInSeconds = 5.0f;
     float _Difficulty = 1.0f;
     float _DifficultyIncreasePerSeconds = 0.025f;
     float _SpawnDistance = 30.0f;
-    float _DestructionDistance = 50.0f;
+    float _DestructionDistance = 70.0f;
 
     float _Speed = 1.0f;
 
@@ -28,6 +29,7 @@ public class AsteroidSpawner : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _SpawnerTransform = transform;
+        _SpaceshipRigid = _SpaceShipTr.GetComponent<Rigidbody>();
 
         StartCoroutine(SpawnAsteroids());
 	}
@@ -35,7 +37,12 @@ public class AsteroidSpawner : MonoBehaviour {
     IEnumerator SpawnAsteroids() {
         while (true)
         {
-            yield return new WaitForSeconds(_InitialAsteroidSpawnsInSeconds / _Difficulty);
+            var sqrMagDiv1000 = _SpaceshipRigid.velocity.sqrMagnitude / 1000;
+            // spawn faster if player is faster, also asteroids need to be faster to keep challenge on same level
+            var speedFactor = Mathf.Lerp(1, 8, sqrMagDiv1000);
+            var spawnAndDistanceFactor = Mathf.Lerp(1, 2, sqrMagDiv1000);
+
+            yield return new WaitForSeconds(_InitialAsteroidSpawnsInSeconds / (spawnAndDistanceFactor * _Difficulty));
 
             GameObject asteroidGo = null;
             if (PooledAsteroids.Count > 0)
@@ -48,7 +55,8 @@ public class AsteroidSpawner : MonoBehaviour {
             }
 
             var asteroid = asteroidGo.GetComponent<Asteroid>();
-            asteroid.Init(this, _SpawnerTransform, _SpaceShipTr, _SpawnDistance, _DestructionDistance, _Speed);
+            asteroid.Init(this, _SpawnerTransform, _SpaceShipTr, spawnAndDistanceFactor * _SpawnDistance, 
+                spawnAndDistanceFactor * _DestructionDistance, _Speed * speedFactor);
         }
     }
 

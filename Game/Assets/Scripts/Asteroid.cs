@@ -16,6 +16,8 @@ public class Asteroid : MonoBehaviour
         _SpaceshipTransform = spaceShipTr;
         _DestructionDist = destructionDistance;
 
+        var spaceRigid = spaceShipTr.GetComponent<Rigidbody>();
+
         var angle = Random.Range(0, 360);
         var x = Mathf.Sin(angle);
         var y = Mathf.Cos(angle);
@@ -23,7 +25,7 @@ public class Asteroid : MonoBehaviour
 
         _Transform.position = _SpaceshipTransform.position + (spawnDistance * spawnVec);
         var rigid = GetComponent<Rigidbody>();
-        rigid.velocity = speed * -spawnVec;
+        rigid.velocity = speed * -spawnVec + spaceRigid.velocity;
     }
 
     private void Update()
@@ -31,6 +33,7 @@ public class Asteroid : MonoBehaviour
         if (_SpaceshipTransform == null)
         {
             _Spawner.ReturnAsteroid(gameObject);
+            return;
         }
         var dist = Vector3.Distance(_Transform.position, _SpaceshipTransform.position);
         if (dist > _DestructionDist)

@@ -819,7 +819,7 @@ Prefab:
     - target: {fileID: 114835765607506648, guid: 49475a39474598043a9970117728cdc8,
         type: 2}
       propertyPath: _PlayerCount
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114835765607506648, guid: 49475a39474598043a9970117728cdc8,
         type: 2}

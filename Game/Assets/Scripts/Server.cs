@@ -22,7 +22,12 @@ public class Server : WebSocketBehavior
 
     public static void Start(bool isLocal = false) {
 
-        var serverIp = isLocal ? "localhost" : ServiceDiscovery.GetIP();
+        var serverIps = ServiceDiscovery.GetIps();
+        //foreach (var item in serverIps)
+        //{
+        //    Debug.Log("Ips: " + item);
+        //}
+        var serverIp = isLocal ? "localhost" : serverIps.First();//ServiceDiscovery.GetIP();
         var address = "ws://" + serverIp + ":5001";
         var route = "/Server";
         ServerUrl = address + route;
