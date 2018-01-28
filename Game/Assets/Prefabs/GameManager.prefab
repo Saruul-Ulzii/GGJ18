@@ -450,9 +450,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Achievements:
   - Name: Speed
-    Description: Fly at least 100 km/h!
+    Description: Fly at least 50000 km/h!
     Time: 0
-    Points: 100
+    Points: 50000
     Goals:
     - IsPlayerGoal: 0
       HasOffset: 0
@@ -559,8 +559,8 @@ MonoBehaviour:
   LobbyManager: {fileID: 114652038529144806}
   LobbyUiRoot: {fileID: 1152891785079042}
   Achievements: {fileID: 114595692955650454}
-  HostWebsocketLocal: 1
-  UseUI: 1
+  HostWebsocketLocal: 0
+  UseUI: 0
   GameScene: game
 --- !u!114 &114752189389546974
 MonoBehaviour:
