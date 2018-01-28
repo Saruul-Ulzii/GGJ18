@@ -32,9 +32,9 @@ public class BurnableMaterial : MonoBehaviour
         Renderer.material.SetColor("_Color", new Color(col, col, col));
         if (burningStatus >= secondsToBurn)
         {
-            float burned = AchievementManager.Instance.GetData("BURNEDASTEROIDS");
+            float burned = GameManager.Instance.Achievements.GetData("BURNEDASTEROIDS");
             burned += 1;
-            AchievementManager.Instance.SetData("BURNEDASTEROIDS", burned);
+            GameManager.Instance.Achievements.SetData("BURNEDASTEROIDS", burned);
 
             _Asteroid.Destroy();
         }
