@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 4433567424459466}
   - component: {fileID: 114693733605867432}
   - component: {fileID: 114652038529144806}
-  - component: {fileID: 114602313319044254}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -456,6 +455,7 @@ MonoBehaviour:
     Points: 100
     Goals:
     - IsPlayerGoal: 0
+      HasOffset: 0
       PlayerId: 0
       Id: SPEED
       Goal: 100
@@ -465,6 +465,7 @@ MonoBehaviour:
     Points: 100
     Goals:
     - IsPlayerGoal: 1
+      HasOffset: 1
       PlayerId: 0
       Id: PRESSTIME
       Goal: 15
@@ -474,6 +475,7 @@ MonoBehaviour:
     Points: 100
     Goals:
     - IsPlayerGoal: 1
+      HasOffset: 1
       PlayerId: 0
       Id: RELEASETIME
       Goal: 15
@@ -483,6 +485,7 @@ MonoBehaviour:
     Points: 0
     Goals:
     - IsPlayerGoal: 1
+      HasOffset: 1
       PlayerId: 0
       Id: BURNEDASTEROIDS
       Goal: 3
@@ -492,6 +495,7 @@ MonoBehaviour:
     Points: 0
     Goals:
     - IsPlayerGoal: 0
+      HasOffset: 1
       PlayerId: 0
       Id: HITS
       Goal: 2
@@ -522,24 +526,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114602313319044254
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1488418459459908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f334c7659f711dc439afde8cd5bc4961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0.034482475, g: 0, b: 1, a: 1}
-  - {r: 0.07586217, g: 1, b: 0, a: 1}
-  - {r: 0.9862069, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.84827614, a: 1}
-  - {r: 0, g: 0.95862055, b: 1, a: 1}
 --- !u!114 &114652038529144806
 MonoBehaviour:
   m_ObjectHideFlags: 1

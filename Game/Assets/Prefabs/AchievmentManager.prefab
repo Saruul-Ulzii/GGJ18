@@ -58,6 +58,7 @@ MonoBehaviour:
     Points: 100
     Goals:
     - IsPlayerGoal: 0
+      HasOffset: 0
       PlayerId: 0
       Id: SPEED
       Goal: 100
@@ -67,6 +68,7 @@ MonoBehaviour:
     Points: 100
     Goals:
     - IsPlayerGoal: 1
+      HasOffset: 1
       PlayerId: 0
       Id: PRESSTIME
       Goal: 15
@@ -76,6 +78,7 @@ MonoBehaviour:
     Points: 100
     Goals:
     - IsPlayerGoal: 1
+      HasOffset: 1
       PlayerId: 0
       Id: RELEASETIME
       Goal: 15
@@ -85,6 +88,7 @@ MonoBehaviour:
     Points: 0
     Goals:
     - IsPlayerGoal: 1
+      HasOffset: 1
       PlayerId: 0
       Id: BURNEDASTEROIDS
       Goal: 3
@@ -94,6 +98,7 @@ MonoBehaviour:
     Points: 0
     Goals:
     - IsPlayerGoal: 0
+      HasOffset: 1
       PlayerId: 0
       Id: HITS
       Goal: 2
