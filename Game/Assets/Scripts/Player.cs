@@ -3,7 +3,6 @@
 public class Player
 {
     public int Id;
-    public Texture2D Photo;
     public Server Server;
 
     private string name;
