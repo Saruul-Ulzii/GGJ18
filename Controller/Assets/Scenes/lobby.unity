@@ -778,6 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WebSocket: {fileID: 795937769}
+  ResendIntervall: 0.5
 --- !u!1 &518669677
 GameObject:
   m_ObjectHideFlags: 0

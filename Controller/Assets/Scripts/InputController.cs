@@ -4,10 +4,11 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public VerticalWebSocket WebSocket;
+    public float ResendIntervall;
 
     private ButtonState _state;
 
-    private float _resendIntervall;
+    
     private float _lastMessage;
     
 
@@ -32,7 +33,7 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        if(_state == ButtonState.Pressed && Time.time > _lastMessage + _resendIntervall)
+        if(_state == ButtonState.Pressed && Time.time > _lastMessage + ResendIntervall)
         {
             WebSocket.SendButton1Event("PRESSED");
             _lastMessage = Time.time;
