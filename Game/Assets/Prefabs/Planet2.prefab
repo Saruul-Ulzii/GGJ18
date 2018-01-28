@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4907281124303730}
   - component: {fileID: 33753343075359274}
   - component: {fileID: 23361754630562274}
+  - component: {fileID: 95985173146418378}
   m_Layer: 0
   m_Name: Planet2
   m_TagString: Untagged
@@ -83,3 +84,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1879549703460998}
   m_Mesh: {fileID: 4300002, guid: ed3e979ff56554b6eb13ec1275830df8, type: 3}
+--- !u!95 &95985173146418378
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879549703460998}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7dd55a0d931b34fbcb0687c987fc656b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
