@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/qr-reader.unity
+    path: Assets/Scenes/qr-reader.unity
     guid: 4e86c4a04dba21e499c79ac617b44d5b
   - enabled: 1
-    path: Assets/lobby.unity
+    path: Assets/Scenes/lobby.unity
     guid: 688a9048921ddda43b90ab5ade7c839b
