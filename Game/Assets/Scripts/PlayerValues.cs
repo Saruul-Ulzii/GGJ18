@@ -4,7 +4,21 @@ using UnityEngine;
 public class PlayerValues : MonoBehaviour {
     public static PlayerValues Instance;
 
-    public List<Color> colors;
+    [SerializeField]
+    private List<Color> _colors;
+
+    public List<Color> Colors
+    {
+        get
+        {
+            if (_colors == null || _colors.Count == 0)
+            {
+                return new List<Color>(new Color[] { Color.red});
+            }
+            return _colors;
+        }
+    }
+
 
     private void Awake()
     {
