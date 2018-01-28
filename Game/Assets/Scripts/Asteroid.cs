@@ -47,12 +47,15 @@ public class Asteroid : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        float hits = GameManager.Instance.Achievements.GetData("HITS");
-        GameManager.Instance.Achievements.SetData("HITS", hits+1);
+        if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
+        {
+            float hits = GameManager.Instance.Achievements.GetData("HITS");
+            GameManager.Instance.Achievements.SetData("HITS", hits + 1);
+        }
 
         if (_Transform.localScale.x >= 1.0f - float.Epsilon)
         {
-            _Spawner.SpawnExplosion(_Transform.position);
+            _Spawner.SpawnExplosion(_Transform.position, _Rigidbody.velocity);
 
             _Transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             var vec = _Transform.position - collision.transform.position;
@@ -66,7 +69,7 @@ public class Asteroid : MonoBehaviour
 
     public void Destroy()
     {
-        _Spawner.SpawnExplosion(_Transform.position);
+        _Spawner.SpawnExplosion(_Transform.position, _Rigidbody.velocity);
 
         if (gameObject.activeSelf)
             _Spawner.ReturnAsteroid(gameObject);

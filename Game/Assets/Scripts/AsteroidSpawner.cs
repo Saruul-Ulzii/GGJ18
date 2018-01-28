@@ -60,7 +60,7 @@ public class AsteroidSpawner : MonoBehaviour {
         }
     }
 
-    internal void SpawnExplosion(Vector3 position)
+    internal void SpawnExplosion(Vector3 position, Vector3 velocity)
     {
         GameObject explosionGo = null;
         if (PooledExplosions.Count > 0)
@@ -75,6 +75,9 @@ public class AsteroidSpawner : MonoBehaviour {
         }
 
         explosionGo.transform.position = position;
+
+        var rigid = explosionGo.GetComponent<Rigidbody>();
+        rigid.velocity = velocity;
     }
 
     internal void ReturnAsteroid(GameObject go)
