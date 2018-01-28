@@ -90,17 +90,28 @@ public class AchievementManager : MonoBehaviour
 
     public List<Achievement> Achievements;
 
-    public Achievement GetNextAchievement(int playerId)
+    public Achievement GetNextAchievement(int playerId, Achievement previous = null)
     {
-        
-        if (Achievements.Count == 0) {
-            Debug.Log("No achievements found!");
+        if (Achievements.Count == 0)
+        {
             return null;
         }
+        if (previous == null)
+        {
+            var index = Random.Range(0, Achievements.Count);
+            return Achievements[index].Clone(playerId);
+        }
+        else
+        {
+            Achievement result;
+            do
+            {
+                var index = Random.Range(0, Achievements.Count);
+                result = Achievements[index];
+            } while (result.Name == previous.Name);
 
-        var index = Random.Range(0, Achievements.Count);
-        Debug.Log("Next Achievment: " + index+" from "+Achievements.Count);
-        return Achievements[index].Clone(playerId);
+            return result.Clone(playerId);
+        }
     }
 
     public struct StringPlayerId

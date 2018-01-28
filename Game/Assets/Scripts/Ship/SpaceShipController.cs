@@ -33,7 +33,7 @@ public class SpaceShipController : MonoBehaviour {
 
     public Text _SpeedText;
 
-    private float rotationDegrees = 0;
+    //private float rotationDegrees = 0;
     private float rotationAngleOld;
     
     void Start()
@@ -43,18 +43,46 @@ public class SpaceShipController : MonoBehaviour {
         _PlayerInputs = _SpaceShipGenerator.GenerateSpaceship(Mathf.Max(3, playerCount), _EngineControllers);
     }
 
+    private void FixedUpdate()
+    {
+        if (GameManager.Instance.GameState == GameStates.Game)
+        {
+            foreach (var kv in _engineState)
+            {
+                RunEngine(kv.Key.Id, kv.Value);
+            }
+        }
+    }
+
     void Update()
     {
+        if (GameManager.Instance == null)
+            return;
+
+        if (GameManager.Instance.GameState == GameStates.Game)
+        {
+            while (Server.Commands.Count > 0)
+            {
+                var nextCommand = Server.Commands.Dequeue();
+                RunCommand(nextCommand);
+            }
+
+            foreach (var player in Server.Players)
+            {
+                player.StateUpdateTime -= Time.deltaTime;
+                if (player.StateUpdateTime <= 0)
+                {
+                    player.StateUpdateTime = 0;
+                    ResetState(player);
+                }
+            }
+        }
+
         float speed = _Rigidbody.velocity.magnitude * 1000;
         _SpeedText.text = Convert.ToInt32(speed) + " km/h";
         if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
             GameManager.Instance.Achievements.SetData("SPEED", speed);
-
-        foreach (var kv in _engineState)
-        {
-            RunEngine(kv.Key.Id, kv.Value);
-        }
-
+        
         UpdateColors();
 
         if (Input.GetKeyDown("1"))

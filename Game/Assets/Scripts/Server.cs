@@ -7,7 +7,7 @@ using System;
 
 public class Server : WebSocketBehavior
 {
-    private static int _playerIds = 0;
+    //private static int _playerIds = 0;
     private static WebSocketServer _socketServer;
     private Player _player;
 

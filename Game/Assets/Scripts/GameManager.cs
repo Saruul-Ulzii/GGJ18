@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
                     var cmd = new Command(item, "MISSION", a.Name + "\n" + a.Description + ";SUCC");
                     Server.SendPlayerMessage(item, cmd);
 
-                    a = Achievements.GetNextAchievement(item.Id);
+                    a = Achievements.GetNextAchievement(item.Id, a);
                     _playerAchievements[item] = a;
 
                     cmd = new Command(item, "MISSION", a.Name + "\n" + a.Description);
