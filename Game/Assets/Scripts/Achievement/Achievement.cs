@@ -18,7 +18,7 @@ public class Achievement
 
     public Achievement Clone(int playerId)
     {
-        return new Achievement
+        var achievement = new Achievement
         {
             Name = Name,
             Description = Description,
@@ -29,9 +29,16 @@ public class Achievement
                 Id = g.Id,
                 Goal = g.Goal,
                 IsPlayerGoal = g.IsPlayerGoal,
-                PlayerId = g.PlayerId
+                PlayerId = playerId
             }).ToList()
         };
+
+        foreach (var goals in achievement.Goals)
+        {
+            if(goals.HasOffset) goals.UpdateOffset();
+        }
+
+        return achievement;
     }
 }
 
@@ -39,8 +46,11 @@ public class Achievement
 public class AchievementGoal
 {
     public bool IsPlayerGoal;
+    public bool HasOffset;
     [HideInInspector] public int PlayerId;
     public string Id;
+    private float _offset;
+
     public float Goal;
     
     public bool IsAchieved()
@@ -54,6 +64,25 @@ public class AchievementGoal
         {
             data = GameManager.Instance.Achievements.GetData(Id);
         }
-        return data >= Goal;
+        if (HasOffset)
+        {
+            return (data - _offset) >= Goal;
+        }
+        else
+        {
+            return data >= Goal;
+        }
+    }
+    
+    public void UpdateOffset()
+    {
+        if (IsPlayerGoal)
+        {
+            _offset = GameManager.Instance.Achievements.GetPlayerData(PlayerId, Id);
+        }
+        else
+        {
+            _offset = GameManager.Instance.Achievements.GetData(Id);
+        }
     }
 }

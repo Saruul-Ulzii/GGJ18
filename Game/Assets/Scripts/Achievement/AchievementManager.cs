@@ -28,6 +28,19 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
+    public void AddData(string id, float value)
+    {
+        var key = new StringPlayerId(null, id);
+        if (!_dataValues.ContainsKey(key))
+        {
+            _dataValues.Add(key, value);
+        }
+        else
+        {
+            _dataValues[key] += value;
+        }
+    }
+
     public void SetPlayerData(int playerId, string id, float value)
     {
         var key = new StringPlayerId(playerId, id);
@@ -38,6 +51,19 @@ public class AchievementManager : MonoBehaviour
         else
         {
             _dataValues[key] = value;
+        }
+    }
+
+    public void AddPlayerData(int playerId, string id, float value)
+    {
+        var key = new StringPlayerId(playerId, id);
+        if (!_dataValues.ContainsKey(key))
+        {
+            _dataValues.Add(key, value);
+        }
+        else
+        {
+            _dataValues[key] += value;
         }
     }
 
@@ -58,6 +84,7 @@ public class AchievementManager : MonoBehaviour
         {
             return _dataValues[key];
         }
+        Debug.Log("Dont found Key " + id + " in Player Data for Player " + playerId);
         return 0;
     }
 

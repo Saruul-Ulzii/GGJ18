@@ -156,14 +156,11 @@ public class SpaceShipController : MonoBehaviour {
     }
 
     private void RunEngine(int playerID, bool pressed)
-    {        
-        float pressTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "PRESSTIME");
-        float releaseTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "RELEASETIME");
-
+    { 
         if (pressed)
         {
-            pressTime += Time.deltaTime;
-            releaseTime = 0;
+            GameManager.Instance.Achievements.AddPlayerData(playerID, "PRESSTIME", Time.deltaTime);
+
             var tr = transform.GetChild(playerID+1);
             var direction = (tr.rotation * Vector3.back);
 
@@ -173,12 +170,11 @@ public class SpaceShipController : MonoBehaviour {
         }
         else
         {
-            pressTime = 0;
-            releaseTime += Time.deltaTime;
+            GameManager.Instance.Achievements.AddPlayerData(playerID, "RELEASETIME", Time.deltaTime);
         }
 
-        GameManager.Instance.Achievements.SetPlayerData(playerID, "PRESSTIME", pressTime);
-        GameManager.Instance.Achievements.SetPlayerData(playerID, "RELEASETIME", releaseTime);
+       
+       
 
         int engineId = playerID % _EngineControllers.Count;
         _EngineControllers[engineId].On = pressed;
@@ -187,9 +183,7 @@ public class SpaceShipController : MonoBehaviour {
 
     public void CloseHit()
     {
-        Debug.Log("Close Hits");
-        float closeHits = GameManager.Instance.Achievements.GetData("CLOSEHITS");
-        closeHits += 1;
-        GameManager.Instance.Achievements.SetData("CLOSEHITS", closeHits);
+        Debug.Log("Close Hits");        
+        GameManager.Instance.Achievements.AddData("CLOSEHITS", 1);
     }
 }
