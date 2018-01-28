@@ -11,7 +11,7 @@ public class PlayerValues : MonoBehaviour {
     {
         get
         {
-            if (_colors == null || _colors.Count == 1)
+            if (_colors == null || _colors.Count == 0)
             {
                 return new List<Color>(new Color[] { Color.red});
             }
