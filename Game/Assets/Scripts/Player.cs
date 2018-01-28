@@ -3,7 +3,6 @@
 public class Player
 {
     public int Id;
-    public Texture2D Photo;
     public Server Server;
 
     private string name;
@@ -17,8 +16,8 @@ public class Player
     {
         get
         {
-            var colorID = Id % PlayerValues.Instance.colors.Count;
-            var color = PlayerValues.Instance.colors[colorID];
+            var colorID = Id % PlayerValues.Colors.Count;
+            var color = PlayerValues.Colors[colorID];
             return color;
         }
     }

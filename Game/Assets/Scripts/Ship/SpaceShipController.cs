@@ -42,7 +42,7 @@ public class SpaceShipController : MonoBehaviour {
     void Update()
     {
         float speed = _Rigidbody.velocity.magnitude;
-        AchievementManager.Instance.SetData("SPEED", speed);
+        GameManager.Instance.Achievements.SetData("SPEED", speed);
 
         foreach (var kv in _engineState)
         {
@@ -85,8 +85,8 @@ public class SpaceShipController : MonoBehaviour {
         foreach (var kv in _engineState)
         {
             int engineId = kv.Key.Id % _EngineControllers.Count;
-            var colorID = kv.Key.Id % PlayerValues.Instance.colors.Count;
-            var color = PlayerValues.Instance.colors[colorID];
+            var colorID = kv.Key.Id % PlayerValues.Colors.Count;
+            var color = PlayerValues.Colors[colorID];
             _EngineControllers[engineId].SetColor(color);
         }
     }
@@ -101,8 +101,8 @@ public class SpaceShipController : MonoBehaviour {
 //        {
 //            rotationDegrees = 0;
 //            Debug.Log("+1 Rotation");
-//            float rota = AchievementManager.Instance.GetData("ROTATIONS");
-//            AchievementManager.Instance.SetData("ROTATIONS", rota +1);
+//            float rota = GameManager.Instance.Achievements.GetData("ROTATIONS");
+//            GameManager.Instance.Achievements.SetData("ROTATIONS", rota +1);
 //        }
 //
 //        rotationAngleOld = transform.eulerAngles.x;
@@ -157,8 +157,8 @@ public class SpaceShipController : MonoBehaviour {
 
     private void RunEngine(int playerID, bool pressed)
     {        
-        float pressTime = AchievementManager.Instance.GetPlayerData(playerID, "PRESSTIME");
-        float releaseTime = AchievementManager.Instance.GetPlayerData(playerID, "RELEASETIME");
+        float pressTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "PRESSTIME");
+        float releaseTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "RELEASETIME");
 
         if (pressed)
         {
@@ -177,8 +177,8 @@ public class SpaceShipController : MonoBehaviour {
             releaseTime += Time.deltaTime;
         }
 
-        AchievementManager.Instance.SetPlayerData(playerID, "PRESSTIME", pressTime);
-        AchievementManager.Instance.SetPlayerData(playerID, "RELEASETIME", releaseTime);
+        GameManager.Instance.Achievements.SetPlayerData(playerID, "PRESSTIME", pressTime);
+        GameManager.Instance.Achievements.SetPlayerData(playerID, "RELEASETIME", releaseTime);
 
         int engineId = playerID % _EngineControllers.Count;
         _EngineControllers[engineId].On = pressed;
@@ -188,8 +188,8 @@ public class SpaceShipController : MonoBehaviour {
     public void CloseHit()
     {
         Debug.Log("Close Hits");
-        float closeHits = AchievementManager.Instance.GetData("CLOSEHITS");
+        float closeHits = GameManager.Instance.Achievements.GetData("CLOSEHITS");
         closeHits += 1;
-        AchievementManager.Instance.SetData("CLOSEHITS", closeHits);
+        GameManager.Instance.Achievements.SetData("CLOSEHITS", closeHits);
     }
 }

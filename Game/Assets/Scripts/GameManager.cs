@@ -14,8 +14,10 @@ public class GameManager : MonoBehaviour
     public LobbyManager LobbyManager;
     
     public GameObject LobbyUiRoot;
+    public AchievementManager Achievements;
 
     public bool HostWebsocketLocal;
+    public bool UseUI;
     public string GameScene;
 
     private Dictionary<Player, Achievement> _playerAchievements = new Dictionary<Player, Achievement>();
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
         _playerAchievements = new Dictionary<Player, Achievement>();
         foreach (var player in Server.Players)
         {
-            var a = AchievementManager.Instance.GetNextAchievement(player.Id);
+            var a = Achievements.GetNextAchievement(player.Id);
             _playerAchievements.Add(player, a);
             Server.SendPlayerMessage(player, new Command(player, "MISSION", a.Name + "\n" + a.Description));
         }
@@ -88,7 +90,7 @@ public class GameManager : MonoBehaviour
                     var cmd = new Command(item, "MISSION", a.Name + "\n" + a.Description + ";SUCC");
                     Server.SendPlayerMessage(item, cmd);
 
-                    a = AchievementManager.Instance.GetNextAchievement(item.Id);
+                    a = Achievements.GetNextAchievement(item.Id);
                     _playerAchievements[item] = a;
 
                     cmd = new Command(item, "MISSION", a.Name + "\n" + a.Description);
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUi()
     {
-        LobbyUiRoot.SetActive(GameState == GameStates.Lobby);
+        LobbyUiRoot.SetActive(GameState == GameStates.Lobby && UseUI);
     }
 }
 

@@ -96,6 +96,7 @@ public class Server : WebSocketBehavior
                     DisconnectedPlayers.Remove(dplayer);
                     _player.Id = dplayer.Id;
                     _player.Name = dplayer.Name;
+                    _player.Server = this;
                     _player.CommandCount = dplayer.CommandCount;
                 }
                 break;
