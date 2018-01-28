@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceShipController : MonoBehaviour {
     
@@ -29,9 +31,7 @@ public class SpaceShipController : MonoBehaviour {
     [SerializeField]
     int _TestPlayerControls = -1;
 
-    private float rotationDegrees = 0;
-    private float rotationAngleOld;
-    
+    public Text _SpeedText;
     void Start()
     {
         _EngineControllers = new List<TriebwerkController>();
@@ -41,7 +41,8 @@ public class SpaceShipController : MonoBehaviour {
 
     void Update()
     {
-        float speed = _Rigidbody.velocity.magnitude;
+        float speed = _Rigidbody.velocity.magnitude*1000;      
+        _SpeedText.text = Convert.ToInt32(speed) + " km/h";
         if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
             GameManager.Instance.Achievements.SetData("SPEED", speed);
 
@@ -92,22 +93,6 @@ public class SpaceShipController : MonoBehaviour {
         }
     }
 
-    //TODO not working #Julius
-//    private void countRotations()
-//    {
-//        rotationDegrees += Abs(transform.eulerAngles.x - rotationAngleOld);
-//                Debug.Log(rotationDegrees);
-//        //            Debug.Log( transform.eulerAngles.x);
-//        if (-360 > rotationDegrees || rotationDegrees > 360)
-//        {
-//            rotationDegrees = 0;
-//            Debug.Log("+1 Rotation");
-//            float rota = GameManager.Instance.Achievements.GetData("ROTATIONS");
-//            GameManager.Instance.Achievements.SetData("ROTATIONS", rota +1);
-//        }
-//
-//        rotationAngleOld = transform.eulerAngles.x;
-//    }
 
     public void RunCommand(Command command)
     {
