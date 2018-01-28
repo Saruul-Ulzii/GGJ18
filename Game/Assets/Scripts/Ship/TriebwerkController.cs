@@ -16,9 +16,7 @@ public class TriebwerkController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _rend = GetComponent<Renderer>();
-        _rend.material.SetColor("_MKGlowColor", PlayerColor);
-        _rend.material.SetColor("_MKGlowTexColor", PlayerColor);
+   
 
         _glow = transform.Find("Afterburner").transform.Find("Glow").gameObject;
 
@@ -28,6 +26,10 @@ public class TriebwerkController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _rend = GetComponent<Renderer>();
+        _rend.material.SetColor("_MKGlowColor", PlayerColor);
+        _rend.material.SetColor("_MKGlowTexColor", PlayerColor);
+
         ParticleSystem glowParticles = _glow.GetComponent<ParticleSystem>();
         var emmisionBurn = _burn.emission;
         var emmisionGlow = glowParticles.emission;

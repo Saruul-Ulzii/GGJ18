@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public class SpaceShipController : MonoBehaviour {
@@ -27,6 +28,9 @@ public class SpaceShipController : MonoBehaviour {
 
     [SerializeField]
     int _TestPlayerControls = -1;
+
+    private float rotationDegrees = 0;
+    private float rotationAngleOld;
     
     void Start()
     {
@@ -74,6 +78,23 @@ public class SpaceShipController : MonoBehaviour {
         }
 
     }
+
+    //TODO not working #Julius
+//    private void countRotations()
+//    {
+//        rotationDegrees += Abs(transform.eulerAngles.x - rotationAngleOld);
+//                Debug.Log(rotationDegrees);
+//        //            Debug.Log( transform.eulerAngles.x);
+//        if (-360 > rotationDegrees || rotationDegrees > 360)
+//        {
+//            rotationDegrees = 0;
+//            Debug.Log("+1 Rotation");
+//            float rota = AchievementManager.Instance.GetData("ROTATIONS");
+//            AchievementManager.Instance.SetData("ROTATIONS", rota +1);
+//        }
+//
+//        rotationAngleOld = transform.eulerAngles.x;
+//    }
 
     public void RunCommand(Command command)
     {
@@ -154,7 +175,7 @@ public class SpaceShipController : MonoBehaviour {
 
     public void CloseHit()
     {
-        
+        Debug.Log("Close Hits");
         float closeHits = AchievementManager.Instance.GetData("CLOSEHITS");
         closeHits += 1;
         AchievementManager.Instance.SetData("CLOSEHITS", closeHits);
