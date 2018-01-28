@@ -14,8 +14,8 @@ public class AsteroidSpawner : MonoBehaviour {
     Transform _SpaceShipTr;
     Rigidbody _SpaceshipRigid;
 
-    float _InitialAsteroidSpawnsInSeconds = 5.0f;
-    float _Difficulty = 1.0f;
+    float _InitialAsteroidSpawnsInSeconds = 4.0f;
+    float _Difficulty = 0.8f;
     float _DifficultyIncreasePerSeconds = 0.025f;
     float _SpawnDistance = 30.0f;
     float _DestructionDistance = 70.0f;
@@ -60,7 +60,7 @@ public class AsteroidSpawner : MonoBehaviour {
         }
     }
 
-    internal void SpawnExplosion(Vector3 position)
+    internal void SpawnExplosion(Vector3 position, Vector3 velocity)
     {
         GameObject explosionGo = null;
         if (PooledExplosions.Count > 0)
@@ -75,6 +75,9 @@ public class AsteroidSpawner : MonoBehaviour {
         }
 
         explosionGo.transform.position = position;
+
+        var rigid = explosionGo.GetComponent<Rigidbody>();
+        rigid.velocity = velocity;
     }
 
     internal void ReturnAsteroid(GameObject go)

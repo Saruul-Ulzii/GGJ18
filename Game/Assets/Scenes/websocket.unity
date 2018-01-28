@@ -247,7 +247,8 @@ Prefab:
       propertyPath: HostWebsocketLocal
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114602313319044254, guid: 8b9b457654fd1514da684f1e986f1ba2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8b9b457654fd1514da684f1e986f1ba2, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &394173837

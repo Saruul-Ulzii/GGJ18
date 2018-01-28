@@ -261,7 +261,6 @@ MonoBehaviour:
   _PlayerCount: 3
   _DegreesOfFreedom: 45
   _RotationSpeed: 60
-  AchievementManager: {fileID: 0}
   _Rigidbody: {fileID: 54169504072576226}
   _TestPlayerControls: -1
 --- !u!114 &114866925668062144
@@ -276,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Anchor: {fileID: 4055140221669974}
-  _EnginePrefab: {fileID: 1622085600549116, guid: 7a195abe5cbc2044381ebcd305afc4a8,
+  _EnginePrefab: {fileID: 1373034537887882, guid: 7a195abe5cbc2044381ebcd305afc4a8,
     type: 2}
   _DetailLightPrefab: {fileID: 1303735272823582, guid: 4a628c096b96cfe4bb204061bb3f7188,
     type: 2}
