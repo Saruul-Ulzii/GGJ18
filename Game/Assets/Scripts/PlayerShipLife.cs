@@ -24,7 +24,12 @@ public class PlayerShipLife : MonoBehaviour
 
     // Use this for initialization
     void OnCollisionEnter (Collision collision) {
-        CurrentLife -= damageFactor*collision.relativeVelocity.magnitude;
+        if(damageFactor * collision.relativeVelocity.magnitude > 35) // Max Dmg 30 
+        {
+            CurrentLife -= 30;
+        }
+        else { CurrentLife -= damageFactor * collision.relativeVelocity.magnitude; }
+        
 
         if (CurrentLife < 0)
         {
