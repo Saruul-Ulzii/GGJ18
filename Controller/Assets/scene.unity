@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.4964127, b: 0.5748172, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -145,13 +145,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c257dcf14e4b54fa37d4b87d7d8dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerColor: {r: 0.15862083, g: 1, b: 0, a: 1}
   MissionText: blablablablablab
   PlayerIndicator: B
   MissionTextComponent: {fileID: 0}
   PlayerIndicatorComponent: {fileID: 0}
   EngineButton: {fileID: 0}
   ButtonCenterImage: {fileID: 0}
+  CallSuccess: 1
+  CallFail: 1
+  FailNotification: {fileID: 0}
+  SuccesNotification: {fileID: 0}
+  NotificationWaitTime: 2
 --- !u!114 &93375493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &247684816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -609,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &445396882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -677,9 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0589b0cd51e2f4aba8458e8b4fa1c584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ws: {fileID: 795937769}
-  Next: {fileID: 1747009245}
-  webcamDisplay: {fileID: 247684817}
 --- !u!1 &518669677
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +933,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button1: {fileID: 445396881}
+  WaitingScreen: {fileID: 0}
+  MissionText: {fileID: 0}
 --- !u!4 &795937770
 Transform:
   m_ObjectHideFlags: 0
@@ -1291,11 +1294,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 19
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 54
+    m_MinSize: 5
+    m_MaxSize: 63
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1557,8 +1560,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 1522557231}
-  enterTextButton: {fileID: 1998739055}
+  joinBtn: {fileID: 0}
+  waitingScreen: {fileID: 0}
   ws: {fileID: 795937769}
+  IPText: {fileID: 0}
 --- !u!1 &2031862758
 GameObject:
   m_ObjectHideFlags: 0
