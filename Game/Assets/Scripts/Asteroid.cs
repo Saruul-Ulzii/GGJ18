@@ -64,7 +64,7 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-    void Destroy()
+    public void Destroy()
     {
         _Spawner.SpawnExplosion(_Transform.position);
 
