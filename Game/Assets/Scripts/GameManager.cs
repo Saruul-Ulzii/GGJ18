@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public AchievementManager Achievements;
 
     public bool HostWebsocketLocal;
+    public bool UseUI;
     public string GameScene;
 
     private Dictionary<Player, Achievement> _playerAchievements = new Dictionary<Player, Achievement>();
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUi()
     {
-        LobbyUiRoot.SetActive(GameState == GameStates.Lobby);
+        LobbyUiRoot.SetActive(GameState == GameStates.Lobby && UseUI);
     }
 }
 
