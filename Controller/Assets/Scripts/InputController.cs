@@ -11,7 +11,7 @@ public class InputController : MonoBehaviour
     private float _lastMessage;
     
 
-    private InputController()
+    void Awake()
     {
         _state = ButtonState.Released;
         _lastMessage = Time.time;
