@@ -48,11 +48,11 @@ public class AchievementGoal
         float data;
         if (IsPlayerGoal)
         {
-            data = AchievementManager.Instance.GetPlayerData(PlayerId, Id);
+            data = GameManager.Instance.Achievements.GetPlayerData(PlayerId, Id);
         }
         else
         {
-            data = AchievementManager.Instance.GetData(Id);
+            data = GameManager.Instance.Achievements.GetData(Id);
         }
         return data >= Goal;
     }

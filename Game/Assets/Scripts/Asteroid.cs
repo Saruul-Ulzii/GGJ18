@@ -47,8 +47,8 @@ public class Asteroid : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        float hits = AchievementManager.Instance.GetData("HITS");
-        AchievementManager.Instance.SetData("HITS", hits+1);
+        float hits = GameManager.Instance.Achievements.GetData("HITS");
+        GameManager.Instance.Achievements.SetData("HITS", hits+1);
 
         if (_Transform.localScale.x >= 1.0f - float.Epsilon)
         {

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
-    public static AchievementManager Instance;
+    //public static AchievementManager Instance;
 
     private Dictionary<StringPlayerId, float> _dataValues = new Dictionary<StringPlayerId, float>();
 
-    private void Start()
-    {        
-        Instance = this;    
-    }
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //    DontDestroyOnLoad(this.gameObject);
+    //    Debug.Log("New Archivement Instance!!!");
+    //}
 
     public void SetData(string id, float value)
     {
@@ -63,7 +65,11 @@ public class AchievementManager : MonoBehaviour
 
     public Achievement GetNextAchievement(int playerId)
     {
-        if (Achievements.Count == 0) return null;
+        
+        if (Achievements.Count == 0) {
+            Debug.Log("No achievements found!");
+            return null;
+        }
 
         var index = Random.Range(0, Achievements.Count);
         Debug.Log("Next Achievment: " + index+" from "+Achievements.Count);
