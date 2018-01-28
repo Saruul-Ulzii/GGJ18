@@ -612,7 +612,6 @@ MonoBehaviour:
   _AsteroidPrefab: {fileID: 1402934230648244, guid: 2e0bf79293b418947885c5c7531a495c,
     type: 2}
   _SpaceShipTr: {fileID: 587238333}
-  _AchievementManager: {fileID: 2090137861}
 --- !u!4 &1330968669
 Transform:
   m_ObjectHideFlags: 0
@@ -814,7 +813,7 @@ Prefab:
     - target: {fileID: 114835765607506648, guid: 49475a39474598043a9970117728cdc8,
         type: 2}
       propertyPath: _PlayerCount
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114835765607506648, guid: 49475a39474598043a9970117728cdc8,
         type: 2}
