@@ -5,23 +5,20 @@ using UnityEngine;
 
 public class TriebwerkController : MonoBehaviour
 {
-    public Color PlayerColor;
     public bool On;
     public float Intensity = 1f;
 
     private GameObject _glow;
     private ParticleSystem _burn;
+    private Renderer _rend;
+    private Color _playerColor;
 
-    private Renderer _rend; 
-    // Use this for initialization
+
     void Start()
     {
         _rend = GetComponent<Renderer>();
-        _rend.material.SetColor("_MKGlowColor", PlayerColor);
-        _rend.material.SetColor("_MKGlowTexColor", PlayerColor);
-
+        SetColor(_playerColor);
         _glow = transform.Find("Afterburner").transform.Find("Glow").gameObject;
-
         _burn = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -36,12 +33,10 @@ public class TriebwerkController : MonoBehaviour
             emmisionBurn.enabled = true;
             emmisionGlow.enabled = true;
 
-            _rend.material.SetColor("_MKGlowColor", PlayerColor);
-            _rend.material.SetColor("_MKGlowTexColor", PlayerColor);
-
+            SetColor(_playerColor);
 
             var colGlow = glowParticles.colorOverLifetime;
-            colGlow.color = CreateGradientColor(PlayerColor, Color.blue, Intensity);
+            colGlow.color = CreateGradientColor(_playerColor, Color.blue, Intensity);
 
             var colBurn = _burn.colorOverLifetime;
             colBurn.color = CreateGradientColor(Color.red, Color.yellow, Intensity / 2);
@@ -51,7 +46,13 @@ public class TriebwerkController : MonoBehaviour
             emmisionBurn.enabled = false;
             emmisionGlow.enabled = false;
         }
+    }
 
+    public void SetColor(Color color)
+    {
+        _playerColor = color;
+        _rend.material.SetColor("_MKGlowColor", _playerColor);
+        _rend.material.SetColor("_MKGlowTexColor", _playerColor);
     }
 
     private Gradient CreateGradientColor(Color playerColor, Color fadeColor, float alpha)

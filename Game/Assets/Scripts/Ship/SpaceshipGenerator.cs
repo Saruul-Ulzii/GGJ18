@@ -49,7 +49,7 @@ public class SpaceshipGenerator : MonoBehaviour
             playerInputs[i] = new PlayerInputRestrictions(currentAngle);
             engineTr.localRotation = Quaternion.Euler(0, currentAngle, 0);
 
-            var col = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            //var col = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
             var detailLight = Instantiate(_DetailLightPrefab);
             var detailTr = detailLight.transform;
@@ -62,7 +62,7 @@ public class SpaceshipGenerator : MonoBehaviour
 
             //Fabe und Intensität der Triebwerke setzten
             var engineController = engine.GetComponent<TriebwerkController>();
-            engineController.PlayerColor = col;
+            //engineController.SetColor(col);
             engineController.Intensity = 0f;
             engineControllers.Add(engineController);
         }

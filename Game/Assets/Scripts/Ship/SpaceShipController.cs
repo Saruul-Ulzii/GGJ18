@@ -45,6 +45,8 @@ public class SpaceShipController : MonoBehaviour {
             RunEngine(kv.Key.Id, kv.Value);
         }
 
+        UpdateColors();
+
         if (Input.GetKeyDown("1"))
             _TestPlayerControls = 1;
         if (Input.GetKeyDown("2"))
@@ -72,7 +74,17 @@ public class SpaceShipController : MonoBehaviour {
                 tr.localRotation = Quaternion.Euler(0, input.currentAngle, 0);
             }
         }
+    }
 
+    private void UpdateColors()
+    {
+        foreach (var kv in _engineState)
+        {
+            int engineId = kv.Key.Id % _EngineControllers.Count;
+            var colorID = kv.Key.Id % PlayerValues.Instance.colors.Count;
+            var color = PlayerValues.Instance.colors[colorID];
+            _EngineControllers[engineId].SetColor(color);
+        }
     }
 
     public void RunCommand(Command command)
