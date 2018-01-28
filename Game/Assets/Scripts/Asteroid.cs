@@ -7,6 +7,7 @@ public class Asteroid : MonoBehaviour
     float _DestructionDist;
 
     Transform _Transform;
+    Rigidbody _Rigidbody;
 
     internal void Init(AsteroidSpawner asteroidSpawner, Transform spawnerTransform, Transform spaceShipTr, float spawnDistance, float destructionDistance, float speed)
     {
@@ -24,8 +25,10 @@ public class Asteroid : MonoBehaviour
         var spawnVec = new Vector3(x, y, 0);
 
         _Transform.position = _SpaceshipTransform.position + (spawnDistance * spawnVec);
-        var rigid = GetComponent<Rigidbody>();
-        rigid.velocity = speed * -spawnVec + spaceRigid.velocity;
+        _Transform.localScale = Vector3.one;
+
+        _Rigidbody = GetComponent<Rigidbody>();
+        _Rigidbody.velocity = speed * -spawnVec + spaceRigid.velocity;
     }
 
     private void Update()
@@ -47,7 +50,18 @@ public class Asteroid : MonoBehaviour
         float hits = AchievementManager.Instance.GetData("HITS");
         AchievementManager.Instance.SetData("HITS", hits+1);
 
-        Destroy();
+        if (_Transform.localScale.x >= 1.0f - float.Epsilon)
+        {
+            _Spawner.SpawnExplosion(_Transform.position);
+
+            _Transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            var vec = _Transform.position - collision.transform.position;
+            _Rigidbody.velocity += 0.25f*_Rigidbody.velocity.magnitude* vec;
+            return;
+        }
+        else {
+            Destroy();
+        }
     }
 
     void Destroy()
