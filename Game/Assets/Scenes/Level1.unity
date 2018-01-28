@@ -894,7 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f334c7659f711dc439afde8cd5bc4961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colors: []
+  _colors: []
 --- !u!4 &1486508509
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,6 +1093,11 @@ Prefab:
       propertyPath: AchievementManager
       value: 
       objectReference: {fileID: 2090137859}
+    - target: {fileID: 114467316964511658, guid: 49475a39474598043a9970117728cdc8,
+        type: 2}
+      propertyPath: MaxLife
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49475a39474598043a9970117728cdc8, type: 2}
   m_IsPrefabParent: 0
