@@ -17,8 +17,8 @@ public class Player
     {
         get
         {
-            var colorID = Id % PlayerValues.Instance.Colors.Count;
-            var color = PlayerValues.Instance.Colors[colorID];
+            var colorID = Id % PlayerValues.Colors.Count;
+            var color = PlayerValues.Colors[colorID];
             return color;
         }
     }
