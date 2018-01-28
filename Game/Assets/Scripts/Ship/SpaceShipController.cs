@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceShipController : MonoBehaviour {
     
@@ -29,6 +31,8 @@ public class SpaceShipController : MonoBehaviour {
     [SerializeField]
     int _TestPlayerControls = -1;
 
+    public Text _SpeedText;
+
     private float rotationDegrees = 0;
     private float rotationAngleOld;
     
@@ -41,8 +45,10 @@ public class SpaceShipController : MonoBehaviour {
 
     void Update()
     {
-        float speed = _Rigidbody.velocity.magnitude;
-        GameManager.Instance.Achievements.SetData("SPEED", speed);
+        float speed = _Rigidbody.velocity.magnitude * 1000;
+        _SpeedText.text = Convert.ToInt32(speed) + " km/h";
+        if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
+            GameManager.Instance.Achievements.SetData("SPEED", speed);
 
         foreach (var kv in _engineState)
         {

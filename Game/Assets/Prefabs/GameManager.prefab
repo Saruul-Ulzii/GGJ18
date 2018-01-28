@@ -560,7 +560,7 @@ MonoBehaviour:
   LobbyUiRoot: {fileID: 1152891785079042}
   Achievements: {fileID: 114595692955650454}
   HostWebsocketLocal: 0
-  UseUI: 0
+  UseUI: 1
   GameScene: game
 --- !u!114 &114752189389546974
 MonoBehaviour:
