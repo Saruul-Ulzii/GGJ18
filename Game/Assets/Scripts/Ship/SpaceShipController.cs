@@ -85,8 +85,8 @@ public class SpaceShipController : MonoBehaviour {
         foreach (var kv in _engineState)
         {
             int engineId = kv.Key.Id % _EngineControllers.Count;
-            var colorID = kv.Key.Id % PlayerValues.Instance.Colors.Count;
-            var color = PlayerValues.Instance.Colors[colorID];
+            var colorID = kv.Key.Id % PlayerValues.Colors.Count;
+            var color = PlayerValues.Colors[colorID];
             _EngineControllers[engineId].SetColor(color);
         }
     }

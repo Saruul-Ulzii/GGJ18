@@ -54,8 +54,8 @@ public class SpaceshipGenerator : MonoBehaviour
             detailTr.SetParent(_Anchor);
             detailTr.localPosition = 0.65f*verts[i] + new Vector3(0, 0.35f, 0);
             detailTr.localRotation = Quaternion.Euler(-90, currentAngle, 0);
-            var colorID = i % PlayerValues.Instance.Colors.Count;
-            var color = PlayerValues.Instance.Colors[colorID];
+            var colorID = i % PlayerValues.Colors.Count;
+            var color = PlayerValues.Colors[colorID];
             detailTr.GetComponent<MeshRenderer>().material.SetColor("_TintColor", color);
 
             currentAngle += angleBetweenPlayerModules;
