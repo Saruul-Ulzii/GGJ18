@@ -17,6 +17,8 @@ public class BurnableMaterial : MonoBehaviour
     void OnEnable()
     {
         burningStatus = 0.0f;
+        Renderer.material.SetColor("_Color", new Color(1, 1, 1));
+
     }
 
     public void Burn() {

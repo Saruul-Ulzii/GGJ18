@@ -197,9 +197,11 @@ public class SpaceShipController : MonoBehaviour {
     public void CloseHit()
     {
         Debug.Log("Close Hits");
-        float closeHits = GameManager.Instance.Achievements.GetData("CLOSEHITS");
-        closeHits += 1;
         if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
+        {
+            float closeHits = GameManager.Instance.Achievements.GetData("CLOSEHITS");
+            closeHits += 1;
             GameManager.Instance.Achievements.SetData("CLOSEHITS", closeHits);
+        }
     }
 }
