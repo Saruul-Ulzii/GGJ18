@@ -18,6 +18,21 @@ public class WSClientBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	}
+
+    void Update()
+    {
+        NicerUpdate();
+    }
+
+    protected virtual void NicerUpdate()
+    {
+        while (commandQueue.Count > 0)
+        {
+            var c = commandQueue.Dequeue();
+            Debug.Log("Dequeue: " + c.Name + " content: " + c.Content);
+            handleCommand(c);
+        }
+    }
 	
     public virtual void handleCommand( Command c)
     {
