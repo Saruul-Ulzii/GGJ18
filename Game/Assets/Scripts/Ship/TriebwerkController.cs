@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class TriebwerkController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject BurnerTrigger;
+
     public bool On;
     public float Intensity = 1f;
 
@@ -40,11 +43,15 @@ public class TriebwerkController : MonoBehaviour
 
             var colBurn = _burn.colorOverLifetime;
             colBurn.color = CreateGradientColor(Color.red, Color.yellow, Intensity / 2);
+
+            BurnerTrigger.SetActive(true);
         }
         else
         {
             emmisionBurn.enabled = false;
             emmisionGlow.enabled = false;
+
+            BurnerTrigger.SetActive(false);
         }
     }
 
@@ -76,7 +83,7 @@ public class TriebwerkController : MonoBehaviour
         return g;
     }
 
-    void OnTriggerExit(Collider other)
+    public void CloseHit()
     {
         GetComponentInParent<SpaceShipController>().CloseHit();
     }

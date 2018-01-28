@@ -14,7 +14,7 @@ public class AsteroidSpawner : MonoBehaviour {
     Transform _SpaceShipTr;
     Rigidbody _SpaceshipRigid;
 
-    float _InitialAsteroidSpawnsInSeconds = 5.0f;
+    float _InitialAsteroidSpawnsInSeconds = 1.0f;
     float _Difficulty = 1.0f;
     float _DifficultyIncreasePerSeconds = 0.025f;
     float _SpawnDistance = 30.0f;
