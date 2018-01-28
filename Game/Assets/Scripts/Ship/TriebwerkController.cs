@@ -12,6 +12,7 @@ public class TriebwerkController : MonoBehaviour
     private ParticleSystem _burn;
     private Renderer _rend;
     private Color _playerColor;
+    private ParticleSystem _glowParticles;
 
 
     void Start()
@@ -20,22 +21,21 @@ public class TriebwerkController : MonoBehaviour
         SetColor(_playerColor);
         _glow = transform.Find("Afterburner").transform.Find("Glow").gameObject;
         _burn = GetComponentInChildren<ParticleSystem>();
+        _rend = GetComponent<Renderer>();
+        _glowParticles = _glow.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ParticleSystem glowParticles = _glow.GetComponent<ParticleSystem>();
         var emmisionBurn = _burn.emission;
-        var emmisionGlow = glowParticles.emission;
+        var emmisionGlow = _glowParticles.emission;
         if (On)
         {
             emmisionBurn.enabled = true;
             emmisionGlow.enabled = true;
 
-            SetColor(_playerColor);
-
-            var colGlow = glowParticles.colorOverLifetime;
+            var colGlow = _glowParticles.colorOverLifetime;
             colGlow.color = CreateGradientColor(_playerColor, Color.blue, Intensity);
 
             var colBurn = _burn.colorOverLifetime;

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class VerticalWebSocket : WSClientBehaviour
     
     public GameObject Button1;
     public GameObject WaitingScreen;
+
+    public Text MissionText;
 
     private GameObject _currentInput;
 
@@ -65,6 +68,8 @@ public class VerticalWebSocket : WSClientBehaviour
         }
     }
 
+    #region commands
+
     public override void handleCommand(Command c)
     {
         Debug.Log("Handle command: " + c.Name);
@@ -74,19 +79,26 @@ public class VerticalWebSocket : WSClientBehaviour
         switch(c.Name.ToLower())
 		{
 			case "id":
-				HandleIdCommand(c.Content.ToLower());
+				HandleIdCommand(c.Content);
                 break;
             case "start":
                 HandleStartCommand();
                 break;
             case "end":
-                base.CloseConnection();
-                SceneManager.LoadScene("qr-reader");
+                HandleEndCommand();
+                break;
+            case "mission":
+                HandleMissionCommand(c.Content);
                 break;
             default: 
                 Debug.Log("unknown command!");
                 break;
 		}
+    }
+
+    private void HandleMissionCommand(string missionText)
+    {
+        MissionText.text = missionText;
     }
 
     private void HandleIdCommand(string arg)
@@ -99,6 +111,12 @@ public class VerticalWebSocket : WSClientBehaviour
         Debug.Log("Received ID");
         State = WebsocketState.Initialized;
         PlayerId = int.Parse(arg);       
+    }
+
+    private void HandleEndCommand()
+    {
+        base.CloseConnection();
+        SceneManager.LoadScene("qr-reader");
     }
 
     private void HandleStartCommand()
@@ -114,6 +132,8 @@ public class VerticalWebSocket : WSClientBehaviour
         _currentInput.SetActive(true);
         WaitingScreen.SetActive(false);
     }
+
+    #endregion
 
     public override void onConnectionReady(object sender, EventArgs e)
     {

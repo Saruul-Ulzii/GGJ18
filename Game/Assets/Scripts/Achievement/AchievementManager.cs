@@ -90,3 +90,4 @@ public class AchievementManager : MonoBehaviour
 // BURNEDASTEROIDS
 // HITS (Asteroids)
 // CLOSEHITS 
+//ROTATIONS (spaceship)
