@@ -561,7 +561,7 @@ MonoBehaviour:
   Achievements: {fileID: 114595692955650454}
   HostWebsocketLocal: 0
   UseUI: 1
-  GameScene: game
+  GameScene: Level1
 --- !u!114 &114752189389546974
 MonoBehaviour:
   m_ObjectHideFlags: 1
