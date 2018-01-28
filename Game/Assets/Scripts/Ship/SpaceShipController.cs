@@ -42,7 +42,8 @@ public class SpaceShipController : MonoBehaviour {
     void Update()
     {
         float speed = _Rigidbody.velocity.magnitude;
-        GameManager.Instance.Achievements.SetData("SPEED", speed);
+        if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
+            GameManager.Instance.Achievements.SetData("SPEED", speed);
 
         foreach (var kv in _engineState)
         {
@@ -156,9 +157,14 @@ public class SpaceShipController : MonoBehaviour {
     }
 
     private void RunEngine(int playerID, bool pressed)
-    {        
-        float pressTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "PRESSTIME");
-        float releaseTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "RELEASETIME");
+    {
+        float pressTime = 0.0f;
+        float releaseTime = 0.0f;
+        if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
+        {
+            pressTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "PRESSTIME");
+            releaseTime = GameManager.Instance.Achievements.GetPlayerData(playerID, "RELEASETIME");
+        }
 
         if (pressed)
         {
@@ -177,8 +183,11 @@ public class SpaceShipController : MonoBehaviour {
             releaseTime += Time.deltaTime;
         }
 
-        GameManager.Instance.Achievements.SetPlayerData(playerID, "PRESSTIME", pressTime);
-        GameManager.Instance.Achievements.SetPlayerData(playerID, "RELEASETIME", releaseTime);
+        if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
+        {
+            GameManager.Instance.Achievements.SetPlayerData(playerID, "PRESSTIME", pressTime);
+            GameManager.Instance.Achievements.SetPlayerData(playerID, "RELEASETIME", releaseTime);
+        }
 
         int engineId = playerID % _EngineControllers.Count;
         _EngineControllers[engineId].On = pressed;
@@ -190,6 +199,7 @@ public class SpaceShipController : MonoBehaviour {
         Debug.Log("Close Hits");
         float closeHits = GameManager.Instance.Achievements.GetData("CLOSEHITS");
         closeHits += 1;
-        GameManager.Instance.Achievements.SetData("CLOSEHITS", closeHits);
+        if (GameManager.Instance != null && GameManager.Instance.Achievements != null)
+            GameManager.Instance.Achievements.SetData("CLOSEHITS", closeHits);
     }
 }
